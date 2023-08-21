@@ -1,24 +1,55 @@
-import logo from './logo.svg';
+import Footer from './components/footer';
+import Header from './components/header';
+import Welcome from './components/pages/welcome';
+import Home from './components/pages/home';
+import Explore from './components/pages/explore';
+import Saved from './components/pages/saved';
+import Profile from './components/pages/profile';
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <div>
+          <Header />
+          <div className='container'>
+            <Routes>
+              <Route
+                path="/"
+                element={<Welcome />}
+              />
+              <Route
+                path="/Home"
+                element={<Home />}
+              />
+              <Route
+                path="/Explore"
+                element={<Explore />}
+              />
+              <Route
+                path="/Saved"
+                element={<Saved />}
+              />
+              <Route
+                path="/Profile"
+                element={<Profile />}
+              />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 

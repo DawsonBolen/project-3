@@ -1,0 +1,67 @@
+.welcome-main {
+    background-image: url(/public/images/welcome-background.png);
+    width: 100%;
+    height: 0;
+    padding-top: 32.45%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 2em auto;
+
+}
+
+#signup-form input {
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 1em;
+    background-color: #F7F7FF;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 2em auto;
+}
+
+#login-form input {
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 1em;
+    background-color: #F7F7FF;
+}
+
+.login-button {
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    height: 30px;
+    background-color: #577399;
+}
+
+.login-button:hover {
+    background-color: #FE5F55;
+    color: white;
+}
+
+.sign-in-form-body {
+    text-align: center;
+    margin: 2em auto;
+}
+
+.normal-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
