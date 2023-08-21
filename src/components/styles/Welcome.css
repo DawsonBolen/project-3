@@ -10,7 +10,7 @@
 #signup-form {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 50%;
     margin: 2em auto;
 
 }
@@ -48,6 +48,7 @@
     border-radius: 30px;
     height: 30px;
     background-color: #577399;
+    color: white;
 }
 
 .login-button:hover {
@@ -64,4 +65,16 @@
     color: blue;
     text-decoration: underline;
     cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+    #signup-form {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #signup-form {
+        width: 95%;
+    }
 }

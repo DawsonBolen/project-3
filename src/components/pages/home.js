@@ -1,8 +1,11 @@
 import React from 'react'
+import BlogFeed from '../blogFeed'
 
 const Home = () => {
     return (
-        <div>H</div>
+        <main className='home'>
+            <BlogFeed />
+        </main>
     )
 }
 

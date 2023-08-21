@@ -1,3 +1,10 @@
+p,
+button,
+a {
+  font-family: 'Sawarabi Gothic', sans-serif;
+}
+
+
 .post {
   width: 35px;
   height: 35px;
@@ -150,9 +157,10 @@ footer {
 
 .hamburger-bar {
   width: 30px;
-  height: 3px;
+  height: 4px;
   background-color: #495867;
   margin-bottom: 5px;
+  border-radius: 20px;
 }
 
 .hamburger-menu {
