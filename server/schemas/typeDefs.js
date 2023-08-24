@@ -15,13 +15,14 @@ const typeDefs = gql`
         password: String
         friends: [User]
         friendCount: String
+        posts: [Post]
     }
 
     type Post {
         _id: ID
         postTitle: String
         postBody: String
-        user: User
+        user: ID
     }
 
     type Square {
@@ -44,6 +45,11 @@ const typeDefs = gql`
             username: String!
             password: String!
         ): Auth
+        userPost(
+            user: ID!
+            postTitle: String!
+            postBody: String!
+        ): Post
     }
 `;
 

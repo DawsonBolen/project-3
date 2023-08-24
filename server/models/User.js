@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-const Post = require('./Post');
 
 const userSchema = new Schema({
   firstName: {
@@ -37,7 +36,12 @@ const userSchema = new Schema({
       ref: 'User'
     }
   ],
-  posts: [Post.schema],
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
 },
 {
   toJSON: {
@@ -59,7 +63,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  await bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
 
 userSchema.virtual('friendCount').get(function () {

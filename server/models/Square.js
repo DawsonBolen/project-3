@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const Post = require('./Post');
 
 const squareSchema = new Schema({
     name: {
@@ -12,7 +11,13 @@ const squareSchema = new Schema({
     description: {
         type: String,
     },
-    posts: [Post.schema],
+    posts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Post'
+        }
+    ],
+    
 });
 
 const Square = mongoose.model('Square', squareSchema);

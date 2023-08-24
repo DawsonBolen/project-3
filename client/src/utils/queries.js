@@ -22,3 +22,12 @@ export const QUERY_MATCHUPS = gql`
     }
   }
 `;
+
+export const GET_PROFILE = gql`
+  query GetProfile {
+    users {
+      username
+      firstName
+    }
+  }
+`;

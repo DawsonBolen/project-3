@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         users: async (parent, args, context) => {
-            const users = await User.find();
+            const users = await User.find().populate('Post');
 
             return users
         },
@@ -26,6 +26,15 @@ const resolvers = {
           const token = signToken(user);
     
           return { user, token };
+        },
+        userPost: async (parent, args, context) => {
+            // if (context.user) {
+                const post = await Post.create(args);
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { posts: post }})
+
+                return post;
+            // }
         },
     },
 };

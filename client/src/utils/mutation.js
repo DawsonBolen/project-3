@@ -1,6 +1,23 @@
 //Must Edit CODE
 import { gql } from '@apollo/client';
 
+export const CREATE_ACCOUNT = gql`
+  mutation CreateAccount($username: String!, $email: String!, $password: String!) {
+    createAccount(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+      `;
+export const LOGIN = gql`
+      mutation Login($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+            token
+            user {
+                _id
+      }
+    }
+    `;
+
 export const CREATE_MATCHUP = gql`
   mutation createMatchup($tech1: String!, $tech2: String!) {
     createMatchup(tech1: $tech1, tech2: $tech2) {
@@ -23,6 +40,4 @@ export const CREATE_VOTE = gql`
   }
 `;
 
-export const CREATE_ACCOUNT, LOGIN = gql'
-mutation CreateAccount($username: String!, $email: String!, $password: String!) {
- creatAccount(username: $username, email: $email: $email, password: $password)
+

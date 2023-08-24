@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const User = require('./User');
-
 
 const postSchema = new Schema({
     postTitle: {
@@ -13,8 +11,11 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    user: User.schema
-
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 });
 
 const Post = mongoose.model('Post', postSchema);

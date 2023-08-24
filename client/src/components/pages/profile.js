@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom'; // Import `useParams()` from 'react-router-dom'
-import { GET_PROFILE } from './utils/queries';
+import { GET_PROFILE } from '../../utils/queries';
 
 const Profile = () => {
   const { profileId } = useParams(); // Use `useParams()` to retrieve the profileId from the route parameter
@@ -14,7 +14,7 @@ const Profile = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const { username, fullName, bio, followers, following } = data.profile;
+  const { username, fullName,} = data.profile;
 
   return (
     <div className="profile-container">
@@ -26,13 +26,9 @@ const Profile = () => {
         <div className="profile-info">
           <h2>{username}</h2>
           <p>{fullName}</p>
-          <p>{bio}</p>
         </div>
       </div>
       <div className="profile-stats">
-        <div>
-          <strong>{following}</strong> following
-        </div>
       </div>
       {/* Add more content like user posts, saved posts, etc. */}
     </div>

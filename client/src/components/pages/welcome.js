@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client'; // Import useMutation
-import { CREATE_ACCOUNT, LOGIN } from './path-to-your-graphql-mutations'; // Import your GraphQL mutations
+import { CREATE_ACCOUNT, LOGIN } from '../../utils/mutation'; // Import your GraphQL mutations
 import '../styles/Welcome.css';
 
 const Welcome = () => {
-  const history = useHistory();
+  // const history = useHistory();
   const [login, showLogin] = useState(false);
   const toggleShowLogin = () => {
     showLogin(!login);
@@ -29,7 +29,7 @@ const Welcome = () => {
           },
         });
         // Account created successfully, redirect to homepage
-        history.push('/HomePage');
+        // history.push('/HomePage');
       } catch (error) {
         console.error('Error creating account:', error);
       }
@@ -43,7 +43,7 @@ const Welcome = () => {
           },
         });
         // Login successful, redirect to homepage
-        history.push('/HomePage');
+        // history.push('/HomePage');
       } catch (error) {
         console.error('Error logging in:', error);
       }
