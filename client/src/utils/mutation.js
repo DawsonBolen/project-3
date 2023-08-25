@@ -11,16 +11,19 @@ export const CREATE_ACCOUNT = gql`
         }
         }
       `;
+
 export const LOGIN = gql`
-      mutation Login($username: String!, $password: String!) {
-        login(username: $username, password: $password) {
-            token
-            user {
-                _id
-      }
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
     }
-    }
-    `;
+
+  }
+}
+`;
+
 
 export const CREATE_MATCHUP = gql`
   mutation createMatchup($tech1: String!, $tech2: String!) {
