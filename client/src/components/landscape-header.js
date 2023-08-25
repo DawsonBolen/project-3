@@ -24,9 +24,7 @@ const LandscapeHeader = () => {
                 <div className='main-links'>
                     <Link className='nav-link-style' to='/CreateSquare'>
                         <div className='post'>
-
                             <img src='images/post.png' height='25px'></img>
-
                         </div>
                     </Link>
                     <div className='save'>
@@ -36,9 +34,11 @@ const LandscapeHeader = () => {
                     <div className='explore'>
                         <img src='images/explore.png' height='25px'></img>
                     </div>
-                    <div className='home'>
-                        <img src='images/home-icon.png' height='25px'></img>
-                    </div>
+                    <Link className='nav-link-style' to='/Home'>
+                        <div className='home'>
+                            <img src='images/home-icon.png' height='25px'></img>
+                        </div>
+                    </Link>
                 </div>
             </nav>
         </header>

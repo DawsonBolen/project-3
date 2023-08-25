@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client'; // Import useMutation
 import { CREATE_ACCOUNT, LOGIN } from '../../utils/mutation'; // Import your GraphQL mutations
 import '../styles/Welcome.css';
@@ -23,28 +24,6 @@ function Welcome() {
     setData({ ...formData, [name]: value });
   };
 
-  // const handleChange = async (e) => {
-  //   e.preventDefault();
-
-  //   //DRE added this section. We must change variables
-  //   console.log(formData);
-  //   try {
-  //     const { data } = await login({
-  //       variables: { ...formData },
-  //     });
-  //     //the auth is related to local storage
-  //     Auth.login(data.login.token);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-
-  //   // clear form values
-  //   setFormData({
-  //     username:'',
-  //     email: '',
-  //     password: '',
-  //   });
-  // };
   //DRE stopped adding in this section
 
   const handleFormSubmit = async (e) => {
@@ -59,6 +38,8 @@ function Welcome() {
             email: formData.email,
             password: formData.password,
           },
+
+
         });
 
         const token = response.data.addUser.token;
