@@ -217,6 +217,12 @@ footer {
   text-decoration: none;
 }
 
+
+.home-main {
+  min-height: 100vh;
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .search-button {
     height: 35px;

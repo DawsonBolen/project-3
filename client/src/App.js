@@ -9,6 +9,7 @@ import Home from './components/pages/home';
 import Explore from './components/pages/explore';
 import Saved from './components/pages/saved';
 import Profile from './components/pages/profile';
+import '../src/App.css'
 
 const client = new ApolloClient({
   uri: '/graphql',
