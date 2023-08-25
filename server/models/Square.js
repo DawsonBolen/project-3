@@ -11,14 +11,28 @@ const squareSchema = new Schema({
     description: {
         type: String,
     },
+    users: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User'
+        }
+    ],
     posts: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Post'
         }
     ],
-    
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
+
+squareSchema.virtual('likes').get(function () {
+    return this.users ? this.users.length : 0;
+  });
+  
 
 const Square = mongoose.model('Square', squareSchema);
 

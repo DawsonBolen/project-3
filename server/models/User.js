@@ -42,6 +42,16 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
+  squares: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Square'
+    }
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 },
 {
   toJSON: {
@@ -68,6 +78,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual('friendCount').get(function () {
   return this.friends ? this.friends.length : 0;
+});
+
+userSchema.virtual('fullName').get(function() {
+  return `${this.firstName} ${this.lastName}`;
 });
 
 const User = mongoose.model('User', userSchema);

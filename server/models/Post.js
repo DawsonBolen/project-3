@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Comment = require('./Comment');
+
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
@@ -16,6 +18,17 @@ const postSchema = new Schema({
         ref: 'User',
         required: true
     },
+    comments: [Comment],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+},
+{
+    toJSON: {
+        getters: true,
+    },
+    id: false,
 });
 
 const Post = mongoose.model('Post', postSchema);
