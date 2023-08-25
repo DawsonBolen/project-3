@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client'; // Import useMutation
 import { CREATE_ACCOUNT, LOGIN } from '../../utils/mutation'; // Import your GraphQL mutations
 import '../styles/Welcome.css';
@@ -27,7 +27,10 @@ const Welcome = () => {
             email: formData.get('email'),
             password: formData.get('password'),
           },
+
+
         });
+        // history.push('/Home');
         // Account created successfully, redirect to homepage
         // history.push('/HomePage');
       } catch (error) {
