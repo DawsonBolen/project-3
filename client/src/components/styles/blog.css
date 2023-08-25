@@ -1,0 +1,130 @@
+.square {
+    width: 350px;
+    height: 350px;
+    border: 2px solid #495867;
+    margin-bottom: 1em;
+}
+
+.blog-feed {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 4em auto;
+    flex-wrap: wrap;
+
+}
+
+
+.square-line {
+    width: 95%;
+    height: 3px;
+    background-color: #FE5F55;
+}
+
+.square-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.square-description h2 {
+    color: #495867;
+    font-size: 20px;
+    text-align: center;
+    margin: 0.25em 0;
+}
+
+.square-img {
+    width: 100%;
+    height: 60%;
+    background-position: center;
+}
+
+.short-description {
+    width: 95%;
+    margin: 0.25em 0 0.4em 0;
+    text-align: center;
+}
+
+.likes-and-activity {
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.25em;
+
+}
+
+.square-line-2 {
+    width: 95%;
+    height: 2px;
+    background-color: #577399;
+}
+
+.square-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin-top: 0.5em;
+}
+
+.square-action-button {
+    width: 30px;
+    height: 30px;
+    background-color: #495867;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 0.25em;
+}
+
+.square-action-button:hover {
+    background-color: #FE5F55;
+}
+
+.square-actions-1 {
+    display: flex;
+}
+
+.view-square {
+    display: flex;
+    background-color: #495867;
+    border: none;
+    color: #F7F7FF;
+    border-radius: 30px;
+    width: 125px;
+    height: 30px;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.view-square:hover {
+    background-color: #FE5F55;
+}
+
+.likes-total {
+    display: flex;
+    align-items: center;
+}
+
+.likes-total h6 {
+    margin-left: 0.25em;
+}
+
+.posts-total {
+    display: flex;
+    align-items: center;
+}
+
+.posts-total h6 {
+    margin-left: 0.25em;
+}
+
+@media screen and (max-width: 350px) {
+    .square {
+        width: 300px;
+        height: 300px;
+    }
+
+}

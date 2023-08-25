@@ -1,12 +1,15 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Square, Post, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
+const { populate } = require('../models/Post');
 
 const resolvers = {
     Query: {
         users: async (parent, args, context) => {
 
-            const users = await User.find().populate('posts');
+            const users = await User.find()
+            .populate('squares')
+            .populate('posts');
 
             return users
         },
@@ -17,7 +20,9 @@ const resolvers = {
             return user
         },
         squares: async (parent, args, context) => {
-            const squares = await Square.find();
+            const squares = await Square.find()
+            .populate('users')
+            .populate('posts');
 
             return squares
         },
@@ -28,7 +33,14 @@ const resolvers = {
             return square
         },
         posts: async (parent, args, context) => {
-            const posts = await Post.find().populate('user');
+            const posts = await Post.find()
+            .populate('user')
+            .populate(
+                {
+                    path: 'comments',
+                    populate: { path: 'user' }
+                }
+            );
 
             return posts
         },
@@ -44,25 +56,34 @@ const resolvers = {
             // if (context.user) {
                 const post = await Post.create(args);
 
-                await User.findByIdAndUpdate(args.userId, { $push: { posts: post }})
+                await User.findByIdAndUpdate(args.user, { $push: { posts: post }})
 
-                await Square.findByIdAndUpdate(args.squareId, { $push: { posts: post }})
+                await Square.findByIdAndUpdate(args.square, { $push: { posts: post }})
 
 
+                console.log(post)
                 return post;
             // }
         },
-        createSquare: async (parent, args) => {
+        createSquare: async (parent, args, context) => {
             const square = await Square.create(args);
       
             return square;
         },
-        addComment: async (parent, args) => {
+        saveSquare: async (parent, args, context) => {
+
+            await User.findByIdAndUpdate(args.user, { $push: { squares: args.square }})
+
+            await Square.findByIdAndUpdate(args.square, { $push: { users: args.user }})
+      
+            return args;
+        },
+        addComment: async (parent, args, context) => {
             console.log(args)
 
-            await Post.findByIdAndUpdate(args.postId, { $push: { comments: comment }})
+            await Post.findByIdAndUpdate(args.post, { $push: { comments: args }})
       
-            return comment;
+            return args;
         },
     },
 };

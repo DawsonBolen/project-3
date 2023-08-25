@@ -26,21 +26,16 @@ const typeDefs = gql`
         postTitle: String
         postBody: String
         user: User
+        square: Square
         comments: [Comment]
         createdAt: String
-    }
-
-    type CreatePost {
-        postTitle: String
-        postBody: String
-        userId: ID
-        squareId: ID
     }
 
     type Comment {
         _id: ID
         commentBody: String
-        user: ID
+        user: User
+        post: Post
         createdAt: String
     }
 
@@ -64,26 +59,32 @@ const typeDefs = gql`
 
     type Mutation {
         createUser(
-            firstName: String!
-            lastName: String!
+            firstName: String
+            lastName: String
             email: String!
             username: String!
             password: String!
         ): Auth
         createPost(
-            userId: ID!
-            squareId: ID!
+            user: ID!
+            square: ID!
             postTitle: String!
             postBody: String!
-        ): CreatePost
+        ): Post
         createSquare(
             name: String!
+            description: String!
         ): Square
+        saveSquare(
+            user: ID!
+            square: ID!
+        ): Post
         addComment(
             commentBody: String!
-            postId: ID!
-            userId: ID!
+            post: ID!
+            user: ID!
         ): Comment
+        
     }
 `;
 

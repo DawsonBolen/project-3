@@ -14,9 +14,14 @@ const commentSchema = new Schema(
             maxlength: 280,
             minlength: 1,
         },
-        userId: {
+        user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
+            required: true,
+        },
+        post: {
+            type: Schema.Types.ObjectId,
+            ref: 'Post',
             required: true,
         },
         createdAt: {

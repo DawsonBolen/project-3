@@ -18,6 +18,11 @@ const postSchema = new Schema({
         ref: 'User',
         required: true
     },
+    square: {
+        type: Schema.Types.ObjectId,
+        ref: 'Square',
+        required: true
+    },
     comments: [Comment],
     createdAt: {
         type: Date,
