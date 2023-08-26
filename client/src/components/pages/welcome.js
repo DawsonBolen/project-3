@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'; // Import useMutation
 import { CREATE_ACCOUNT, LOGIN } from '../../utils/mutation'; // Import your GraphQL mutations
 import '../styles/Welcome.css';
 import Auth from '../../utils/auth';
+
 function Welcome() {
   const navigate = useNavigate();
   const [login, showLogin] = useState(false);
@@ -60,16 +61,18 @@ function Welcome() {
             password: formData.password,
           },
         });
+        console.log(response.data.createUser.token);
 
-        const token = response.data.addUser.token;
+        const token = response.data.createUser.token;
         Auth.login(token);
     
         navigate('/Home');
       } else {
         // Login logic using Apollo Client
-        const { data } = await loginUser({
+        const response = await loginUser({
           variables: {
             username: formData.username,
+            email: formData.email,
             password: formData.password,
           },
         });
@@ -79,7 +82,9 @@ function Welcome() {
 
         // Redirect to homepage or handle authentication as needed
         // For now, let's log the token to the console
-        console.log('Logged in with token:', data.login.token);
+        const token = response.data.login.token;
+        console.log(Headers)
+        Auth.login(token);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -102,7 +107,7 @@ function Welcome() {
               <input onChange={handleChange} value={formData.username} type='text' placeholder='username' name='username' />
               <input onChange={handleChange} value={formData.email} type='text' placeholder='email' name='email' />
               <input onChange={handleChange} value={formData.password} type='password' placeholder='password' name='password' />
-              <input onChange={handleChange} value={formData.password} type='password' placeholder='confirm password' />
+              {/* <input onChange={handleChange} value={formData.password} type='password' placeholder='confirm password' /> */}
               <button onClick={handleFormSubmit} type='submit' id='signup-button' className='login-button'>Create Profile</button>
             </form>
             <p>Already have an account? Login <a className='normal-link' onClick={toggleShowLogin}>Here</a></p>

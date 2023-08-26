@@ -2,8 +2,29 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_ACCOUNT = gql`
-mutation CREATE_ACCOUNT($email: String!, $username: String!, $password: String!) {
-  createUser(email: $email, username: $username, password: $password) {
+mutation CREATE_ACCOUNT(
+  $email: String!
+  $username: String!
+  $password: String!
+  ) {
+    createUser(
+      email: $email
+      username: $username
+      password: $password
+      ) {
+        token
+        user {
+          email
+          username
+          password
+        }
+      }
+}`;
+
+export const LOGIN = gql`
+mutation LOGIN($username: String!, $email: String!, $password: String!) {
+  login(username: $username, email: $email, password: $password) {
+    token
     user {
       email
       username
@@ -12,37 +33,50 @@ mutation CREATE_ACCOUNT($email: String!, $username: String!, $password: String!)
   }
 }`;
 
-export const LOGIN = gql`
-mutation login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    token
+export const CREATE_SQUARE = gql`
+mutation CREATE_SQUARE($name: String!, $description: String!) {
+  createSquare(name: $name, description: $description) {
+    name
+    description
+  }
+}`
+
+export const CREATE_POST = gql`
+mutation CREATE_POST($user: ID!, $square: ID!, $postTitle: String!, $postBody: String!) {
+  createPost(user: $user, square: $square, postTitle: $postTitle, postBody: $postBody) {
     user {
       _id
     }
-  }
-}
-`;
-
-export const CREATE_MATCHUP = gql`
-  mutation createMatchup($tech1: String!, $tech2: String!) {
-    createMatchup(tech1: $tech1, tech2: $tech2) {
+    square {
       _id
-      tech1
-      tech2
+    }
+    postTitle
+    postBody
+  }
+}`
+
+export const ADD_COMMENT = gql`
+mutation ADD_COMMENT($commentBody: String!, $post: ID!, $user: ID!) {
+  addComment(commentBody: $commentBody, post: $post, user: $user) {
+    user {
+      _id
+    }
+    post {
+      _id
+    }
+    commentBody
+  }
+}`
+
+export const BOOKMARK = gql`
+mutation BOOKMARK($user: ID!, $square: ID!) {
+  saveSquare(user: $user, square: $square) {
+    user {
+      _id
+    }
+    square {
+      _id
     }
   }
-`;
-
-export const CREATE_VOTE = gql`
-  mutation createVote($_id: String!, $techNum: Int!) {
-    createVote(_id: $_id, techNum: $techNum) {
-      _id
-      tech1
-      tech2
-      tech1_votes
-      tech2_votes
-    }
-  }
-`;
-
+}`
 

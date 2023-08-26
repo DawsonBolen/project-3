@@ -44,6 +44,7 @@ const typeDefs = gql`
         name: String
         description: String
         likes: String
+        postCount: String
         users: [User]
         posts: [Post]
         createdAt: String
@@ -58,9 +59,12 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        login(
+            username: String!
+            email: String!
+            password: String!
+        ): Auth
         createUser(
-            firstName: String
-            lastName: String
             email: String!
             username: String!
             password: String!
