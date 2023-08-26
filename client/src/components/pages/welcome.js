@@ -83,7 +83,6 @@ function Welcome() {
         // Redirect to homepage or handle authentication as needed
         // For now, let's log the token to the console
         const token = response.data.login.token;
-        console.log(Headers)
         Auth.login(token);
       }
     } catch (error) {
