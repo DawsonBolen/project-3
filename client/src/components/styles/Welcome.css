@@ -28,7 +28,7 @@
 #login-form {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 50%;
     margin: 2em auto;
 }
 
