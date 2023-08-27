@@ -12,6 +12,7 @@ import Home from './components/pages/home';
 import Explore from './components/pages/explore';
 import Saved from './components/pages/saved';
 import Profile from './components/pages/profile';
+
 import CreateSquare from './components/pages/createSquare';
 import SquareView from './components/pages/squareView';
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client'; // Import useMutation
 import { CREATE_ACCOUNT, LOGIN } from '../../utils/mutation'; // Import your GraphQL mutations
 import '../styles/Welcome.css';
@@ -36,6 +37,8 @@ function Welcome() {
             email: formData.email,
             password: formData.password,
           },
+
+
         });
 
         const token = response.data.createUser.token;
