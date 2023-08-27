@@ -6,10 +6,14 @@
     justify-content: space-between;
     align-items: flex-end;
 }
+
 /*  */
 
 .square-view-main {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .square-view-intro {
@@ -21,18 +25,65 @@
 
 
 .square-view-img {
+    width: 225px;
+    height: 225px;
     background-color: blue;
-    width: 200px;
-    height: 200px;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.square-view-intro {
+    width: 68%;
 }
 
 .square-view-intro h1 {
     font-size: 30px;
 }
 
+.square-view-intro p {
+    font-family: 'Sawarabi Gothic', sans-serif;
+    line-height: 1.5;
+}
+
 .square-view-intro-description {
-    height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-left: 2em;
+}
+
+.addpost {
+    width: 80%;
+    background-color: #495867;
+    color: white;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.square-view-posts {
+    width: 80%;
+}
+
+.post-body {
+    width: 100%;
+    background-color: #F7F7FF;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.user-title {
+    display: flex;
+}
+
+.user-title p {
+    margin-left: 0.25em;
+}
+
+.user-icon-bg {
+    background-color: #495867;
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+
 }
