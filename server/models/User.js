@@ -40,7 +40,14 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
-  squares: [
+  bookmarkedSquares: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Square',
+      unique: true
+    }
+  ],
+  likedSquares: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Square',

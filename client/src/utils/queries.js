@@ -8,13 +8,16 @@ query ($id: ID!) {
     _id
     username
     email
-    squares {
+    bookmarkedSquares {
       _id
       name
       shortDescription
       longDescription
       postCount
-      likes
+      likesCount
+    }
+    likedSquares {
+      _id
     }
   }
 }
@@ -25,7 +28,7 @@ query GET_SQUARES {
   squares {
     _id
     createdAt
-    likes
+    likesCount
     postCount
     name
     shortDescription
@@ -41,7 +44,7 @@ query GET_SQUARE($id: ID!) {
     shortDescription
     longDescription
     postCount
-    likes
+    likesCount
     posts {
       _id
       postTitle

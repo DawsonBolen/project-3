@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_PROFILE } from '../../utils/queries';
+import { REMOVE_BOOKMARK } from '../../utils/mutation';
 import Auth from '../../utils/auth';
 import '../styles/blog.css'
 
 const Saved = () => {
+    const [RemoveBookmark] = useMutation(REMOVE_BOOKMARK)
+
     const profile = Auth.getProfile();
     const id = profile.data._id;
   
@@ -17,7 +20,20 @@ const Saved = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     
-    const squares = data?.user?.squares || [];
+    const squares = data?.user?.bookmarkedSquares || [];
+
+    const removeBookmark = async (e) => {
+        e.preventDefault();
+
+        const squareId = e.target.getAttribute('square-id');
+
+        const response = await RemoveBookmark({
+            variables: {
+                user: id,
+                square: squareId,
+            },
+        });
+    }
 
     return (
         <div>
@@ -38,7 +54,7 @@ const Saved = () => {
                     <div className='likes-and-activity'>
                         <div className='likes-total'>
                             <img src='images/red-heart-icon.png' width='15px' height='15px'></img>
-                            <h6>{square.likes}</h6>
+                            <h6>{square.likesCount}</h6>
                         </div>
                         <div className='posts-total'>
                             <img src='images/posts-icon.png' width='15px' height='15px'></img>
@@ -56,7 +72,7 @@ const Saved = () => {
                                 <img src='images/save.png' width='15px'></img>
                             </div>
                             <div className='square-action-button square-remove'>
-                                <img src='images/x-icon.png' width='19px'></img>
+                                <img onClick={removeBookmark} square-id={square._id} src='images/x-icon.png' width='19px'></img>
                             </div>
                         </div>
                         <div className='square-actions-2'>

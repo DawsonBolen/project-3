@@ -3,7 +3,7 @@ import './styles/blog.css'
 import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
 import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
-import { BOOKMARK } from '../utils/mutation';
+import { BOOKMARK,LIKE } from '../utils/mutation';
 import Auth from '../utils/auth';
 
 const BlogFeed = () => {
@@ -12,9 +12,8 @@ const BlogFeed = () => {
 
     const { loading, data } = useQuery(GET_SQUARES);
 
-    console.log(data)
-
     const [Bookmark] = useMutation(BOOKMARK);
+    const [Like] = useMutation(LIKE);
 
     const bookmarkSquare = async (e) => {
         e.preventDefault();
@@ -22,6 +21,19 @@ const BlogFeed = () => {
         const squareId = e.target.getAttribute('square-id');
 
         const response = await Bookmark({
+            variables: {
+                user: userId,
+                square: squareId,
+            },
+        });
+    }
+
+    const likeSquare = async (e) => {
+        e.preventDefault();
+
+        const squareId = e.target.getAttribute('square-id');
+
+        const response = await Like({
             variables: {
                 user: userId,
                 square: squareId,
@@ -61,7 +73,7 @@ const BlogFeed = () => {
                         <div className='likes-and-activity'>
                             <div className='likes-total'>
                                 <img src='images/red-heart-icon.png' width='15px' height='15px'></img>
-                                <h6>{square.likes}</h6>
+                                <h6>{square.likesCount}</h6>
                             </div>
                             <div className='posts-total'>
                                 <img src='images/posts-icon.png' width='15px' height='15px'></img>
@@ -73,10 +85,10 @@ const BlogFeed = () => {
                         <div className='square-actions'>
                             <div className='square-actions-1'>
                                 <div className='square-action-button square-like'>
-                                    <img square-id={square._id} src='images/heart-icon.png' width='22px'></img>
+                                    <img onClick={likeSquare} square-id={square._id} src='images/heart-icon.png' width='22px'></img>
                                 </div>
                                 <div className='square-action-button square-save'>
-                                    <img onClick={bookmarkSquare} src='images/save.png' width='15px'></img>
+                                    <img onClick={bookmarkSquare} square-id={square._id} src='images/save.png' width='15px'></img>
                                 </div>
                                 <div className='square-action-button square-remove'>
                                     <img src='images/x-icon.png' width='19px'></img>

@@ -69,9 +69,33 @@ mutation ADD_COMMENT($commentBody: String!, $post: ID!, $user: ID!) {
   }
 }`
 
+export const LIKE = gql`
+mutation LIKE($user: ID!, $square: ID!) {
+  likeSquare(user: $user, square: $square) {
+    user {
+      _id
+    }
+    square {
+      _id
+    }
+  }
+}`
+
 export const BOOKMARK = gql`
 mutation BOOKMARK($user: ID!, $square: ID!) {
   saveSquare(user: $user, square: $square) {
+    user {
+      _id
+    }
+    square {
+      _id
+    }
+  }
+}`
+
+export const REMOVE_BOOKMARK = gql`
+mutation REMOVE_BOOKMARK($user: ID!, $square: ID!) {
+  removeBookmark(user: $user, square: $square) {
     user {
       _id
     }

@@ -14,6 +14,13 @@ const squareSchema = new Schema({
     longDescription: {
         type: String,
     },
+    likes: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          unique: true
+        }
+    ],
     users: [
         {
           type: Schema.Types.ObjectId,
@@ -33,8 +40,8 @@ const squareSchema = new Schema({
     },
 });
 
-squareSchema.virtual('likes').get(function () {
-    return this.users ? this.users.length : 0;
+squareSchema.virtual('likesCount').get(function () {
+    return this.likes ? this.likes.length : 0;
 });
   
 squareSchema.virtual('postCount').get(function () {

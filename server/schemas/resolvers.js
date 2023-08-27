@@ -7,7 +7,6 @@ const resolvers = {
         users: async (parent, args, context) => {
 
             const users = await User.find()
-            .populate('squares')
             .populate('posts');
 
             return users
@@ -15,7 +14,7 @@ const resolvers = {
         user: async (parent, args, context) => {
 
             const user = await User.findById(args)
-            .populate('squares');
+            .populate('bookmarkedSquares');
 
             return user
         },
@@ -112,12 +111,32 @@ const resolvers = {
                 return square;
             }
         },
+        likeSquare: async (parent, args, context) => {
+            if (context.user) {
+
+                await User.findByIdAndUpdate(args.user, { $addToSet: { likedSquares: args.square }})
+
+                await Square.findByIdAndUpdate(args.square, { $addToSet: { likes: args.user }})
+        
+                return args;
+            }
+        },
         saveSquare: async (parent, args, context) => {
             if (context.user) {
 
-                await User.findByIdAndUpdate(args.user, { $addToSet: { squares: args.square }})
+                await User.findByIdAndUpdate(args.user, { $addToSet: { bookmarkedSquares: args.square }})
 
                 await Square.findByIdAndUpdate(args.square, { $addToSet: { users: args.user }})
+        
+                return args;
+            }
+        },
+        removeBookmark: async (parent, args, context) => {
+            if (context.user) {
+
+                await User.findByIdAndUpdate(args.user, { $pull: { bookmarkedSquares: args.square}} )
+
+                await Square.findByIdAndUpdate(args.square, { $pull: { users: args.user }})
         
                 return args;
             }

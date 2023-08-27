@@ -17,7 +17,8 @@ const typeDefs = gql`
         friends: [User]
         friendCount: String
         posts: [Post]
-        squares: [Square]
+        likedSquares: [Square]
+        bookmarkedSquares: [Square]
         createdAt: String
     }
 
@@ -44,7 +45,7 @@ const typeDefs = gql`
         name: String
         shortDescription: String
         longDescription: String
-        likes: String
+        likesCount: String
         postCount: String
         users: [User]
         posts: [Post]
@@ -83,6 +84,14 @@ const typeDefs = gql`
             longDescription: String!
         ): Square
         saveSquare(
+            user: ID!
+            square: ID!
+        ): Post
+        likeSquare(
+            user: ID!
+            square: ID!
+        ): Post
+        removeBookmark(
             user: ID!
             square: ID!
         ): Post
