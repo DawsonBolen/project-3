@@ -1,0 +1,38 @@
+/* added for testing */
+.comment-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+/*  */
+
+.square-view-main {
+    min-height: 100vh;
+}
+
+.square-view-intro {
+    display: flex;
+    width: 80%;
+    margin: 3rem auto;
+    justify-content: space-between;
+}
+
+
+.square-view-img {
+    background-color: blue;
+    width: 200px;
+    height: 200px;
+}
+
+.square-view-intro h1 {
+    font-size: 30px;
+}
+
+.square-view-intro-description {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

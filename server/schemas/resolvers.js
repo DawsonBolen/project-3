@@ -27,7 +27,22 @@ const resolvers = {
         },
         square: async (parent, args, context) => {
 
-            const square = await Square.findById(args);
+            const square = await Square.findById(args)
+            .populate('posts')
+            .populate('users')
+            .populate(
+                {
+                    path: 'posts',
+                    populate: { path: 'user' }
+                }
+            )
+            .populate(
+                {
+                    path: 'posts.comments',
+                    populate: { path: 'user' }
+                }
+            );
+
 
             return square
         },

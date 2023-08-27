@@ -42,7 +42,8 @@ const typeDefs = gql`
     type Square {
         _id: ID
         name: String
-        description: String
+        shortDescription: String
+        longDescription: String
         likes: String
         postCount: String
         users: [User]
@@ -77,7 +78,8 @@ const typeDefs = gql`
         ): Post
         createSquare(
             name: String!
-            description: String!
+            shortDescription: String!
+            longDescription: String!
         ): Square
         saveSquare(
             user: ID!

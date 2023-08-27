@@ -34,10 +34,11 @@ mutation LOGIN($username: String!, $email: String!, $password: String!) {
 }`;
 
 export const CREATE_SQUARE = gql`
-mutation CREATE_SQUARE($name: String!, $description: String!) {
-  createSquare(name: $name, description: $description) {
+mutation CREATE_SQUARE($name: String!, $shortDescription: String!, $longDescription: String!) {
+  createSquare(name: $name, shortDescription: $shortDescription, longDescription: $longDescription) {
     name
-    description
+    shortDescription
+    longDescription
   }
 }`
 

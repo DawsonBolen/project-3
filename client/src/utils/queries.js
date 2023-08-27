@@ -20,7 +20,8 @@ query GET_SQUARES {
     likes
     postCount
     name
-    description
+    shortDescription
+    longDescription
   }
 }`;
 
@@ -28,5 +29,24 @@ export const GET_SQUARE = gql`
 query GET_SQUARE($id: ID!) {
   square(_id: $id) {
     _id
+    name
+    shortDescription
+    longDescription
+    postCount
+    likes
+    posts {
+      _id
+      postTitle
+      postBody
+      user {
+        username
+      }
+      comments {
+        user {
+          username
+        }
+        commentBody
+      }
+    }
   }
 }`

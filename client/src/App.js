@@ -12,6 +12,8 @@ import Home from './components/pages/home';
 import Explore from './components/pages/explore';
 import Saved from './components/pages/saved';
 import Profile from './components/pages/profile';
+import CreateSquare from './components/pages/createSquare';
+import SquareView from './components/pages/squareView';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -48,6 +50,8 @@ function App() {
             <Route path="/Explore" element={<Explore />} />
             <Route path="/Saved" element={<Saved />} />
             <Route path="/Profile" element={<Profile />} />
+            <Route path='/Post' element={<CreateSquare />} />
+            <Route path='/SquareView/:id' element={<SquareView />} />
           </Routes>
         </div>
         <Footer />
