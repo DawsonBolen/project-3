@@ -31,8 +31,11 @@ const squareSchema = new Schema({
 
 squareSchema.virtual('likes').get(function () {
     return this.users ? this.users.length : 0;
-  });
+});
   
+squareSchema.virtual('postCount').get(function () {
+    return this.posts ? this.posts.length : 0;
+});
 
 const Square = mongoose.model('Square', squareSchema);
 

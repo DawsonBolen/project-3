@@ -2,32 +2,31 @@
 
 import { gql } from '@apollo/client';
 
-export const QUERY_TECH = gql`
-  query tech {
-    tech {
-      _id
-      name
-    }
-  }
-`;
-
-export const QUERY_MATCHUPS = gql`
-  query matchups($_id: String) {
-    matchups(_id: $_id) {
-      _id
-      tech1
-      tech2
-      tech1_votes
-      tech2_votes
-    }
-  }
-`;
-
 export const GET_PROFILE = gql`
-  query GetProfile {
-    users {
-      username
-      firstName
-    }
+query ($id: ID!) {
+  user(_id: $id) {
+    _id
+    username
+    email
   }
-`;
+}
+`
+
+export const GET_SQUARES = gql`
+query GET_SQUARES {
+  squares {
+    _id
+    createdAt
+    likes
+    postCount
+    name
+    description
+  }
+}`;
+
+export const GET_SQUARE = gql`
+query GET_SQUARE($id: ID!) {
+  square(_id: $id) {
+    _id
+  }
+}`

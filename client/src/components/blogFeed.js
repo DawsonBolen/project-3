@@ -1,13 +1,20 @@
 import React from 'react'
 import './styles/blog.css'
 import { BlogData } from '../blogdata'
+import { GET_SQUARES } from '../utils/queries'
+import { useQuery } from '@apollo/client';
 
 const BlogFeed = () => {
+
+    const { loading, data } = useQuery(GET_SQUARES);
+
     return (
+        <>
+        { data ? (
         <section className='blog-feed'>
-            {BlogData.map((square) => (
+            {data.squares.map((square) => (
                 <div
-                    key={square.id}
+                    key={square._id}
                     className="square"
                 >
                     <div className='square-img' style={{ backgroundImage: `url(${square.image})` }}>
@@ -16,15 +23,15 @@ const BlogFeed = () => {
                     <div className='square-description'>
                         <h2>{square.name}</h2>
                         <div className='square-line'></div>
-                        <p className='short-description'>{square.shortDescription}</p>
+                        <p className='short-description'>{square.description}</p>
                         <div className='likes-and-activity'>
                             <div className='likes-total'>
                                 <img src='images/red-heart-icon.png' width='15px' height='15px'></img>
-                                <h6>128 Likes</h6>
+                                <h6>{square.likes}</h6>
                             </div>
                             <div className='posts-total'>
                                 <img src='images/posts-icon.png' width='15px' height='15px'></img>
-                                <h6>58 Posts</h6>
+                                <h6>{square.postCount}</h6>
                             </div>
 
                         </div>
@@ -54,6 +61,9 @@ const BlogFeed = () => {
                 </div>
             ))}
         </section>
+        ) : null}
+            {loading ? <img  alt="loading" /> : null}
+        </>
     )
 }
 
