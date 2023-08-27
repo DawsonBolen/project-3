@@ -95,11 +95,11 @@ const BlogFeed = () => {
                                 </div>
                             </div>
                             <div className='square-actions-2'>
-                            <Link  to={`/SquareView/${square._id}`}>
-                                <button className='view-square'>
-                                    View Square
-                                    <img src='images/arrow-icon.png' height='15px'></img>
-                                </button>
+                                <Link  to={`/SquareView/${square._id}`}>
+                                    <button className='view-square'>
+                                        View Square
+                                        <img src='images/arrow-icon.png' height='15px'></img>
+                                    </button>
                                 </Link>
                             </div>
                         </div>

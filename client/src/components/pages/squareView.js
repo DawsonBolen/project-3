@@ -79,7 +79,7 @@ const SquareView = () =>{
             <p>{data.square.longDescription}</p>
         </div>
             </section>
-            <button onClick={togglePostForm}>button</button>
+            <button onClick={togglePostForm}>Post something!</button>
             {!post ? (
                 <></>
             ): (
@@ -99,14 +99,15 @@ const SquareView = () =>{
                     <p>{post.postBody}</p>
                     <p>{post.user.username}</p>
 
+                    {post.comments.map((comment) => (
+                        <h2 className="comment" key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
+                    ))}
+
                     <form onSubmit={addComment} className='comment-form'>
                     <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
-                    <button type='submit'>submit</button>
+                    <button type='submit'>comment</button>
                     </form>
 
-                    {post.comments.map((comment) => (
-                        <h2 key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
-                    ))}
                 </div>
                 
             ))}

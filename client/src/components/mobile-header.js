@@ -14,7 +14,6 @@ const MobileHeader = () => {
                 <div className='mobile-nav-top'>
                     <Link to={'/Home'}>
                         <img className='logo-mobile' src='images/square-share-logo.png' height='50px'></img>
-
                     </Link>
 
                     <div className='search'>
