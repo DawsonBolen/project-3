@@ -8,7 +8,10 @@ const squareSchema = new Schema({
         required: true,
         trim: true,
     },
-    description: {
+    shortDescription: {
+        type: String,
+    },
+    longDescription: {
         type: String,
     },
     users: [

@@ -1,8 +1,8 @@
 import React from 'react'
 import './styles/blog.css'
-import { BlogData } from '../blogdata'
 import { GET_SQUARES } from '../utils/queries'
 import { useQuery } from '@apollo/client';
+import { Link, useParams } from 'react-router-dom';
 
 const BlogFeed = () => {
 
@@ -23,7 +23,7 @@ const BlogFeed = () => {
                     <div className='square-description'>
                         <h2>{square.name}</h2>
                         <div className='square-line'></div>
-                        <p className='short-description'>{square.description}</p>
+                        <p className='short-description'>{square.shortDescription}</p>
                         <div className='likes-and-activity'>
                             <div className='likes-total'>
                                 <img src='images/red-heart-icon.png' width='15px' height='15px'></img>
@@ -49,10 +49,12 @@ const BlogFeed = () => {
                                 </div>
                             </div>
                             <div className='square-actions-2'>
+                            <Link  to={`/SquareView/${square._id}`}>
                                 <button className='view-square'>
                                     View Square
                                     <img src='images/arrow-icon.png' height='15px'></img>
                                 </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

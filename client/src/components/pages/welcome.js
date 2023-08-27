@@ -25,8 +25,6 @@ function Welcome() {
     setData({ ...formData, [name]: value });
   };
 
-  //DRE stopped adding in this section
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,7 +40,6 @@ function Welcome() {
 
 
         });
-        console.log(response.data.createUser.token);
 
         const token = response.data.createUser.token;
         Auth.login(token);
