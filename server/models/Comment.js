@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const commentSchema = new Schema(
     {
-        _id: {
+        comment_id: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
         },

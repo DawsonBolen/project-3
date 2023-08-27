@@ -103,6 +103,10 @@ const SquareView = () =>{
                     <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
                     <button type='submit'>submit</button>
                     </form>
+
+                    {post.comments.map((comment) => (
+                        <h2 key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
+                    ))}
                 </div>
                 
             ))}

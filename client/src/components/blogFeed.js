@@ -1,12 +1,46 @@
 import React from 'react'
 import './styles/blog.css'
-import { GET_SQUARES } from '../utils/queries'
-import { useQuery } from '@apollo/client';
+import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
+import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
+import { BOOKMARK } from '../utils/mutation';
+import Auth from '../utils/auth';
 
 const BlogFeed = () => {
+    const profile = Auth.getProfile();
+    const userId = profile.data._id
 
     const { loading, data } = useQuery(GET_SQUARES);
+
+    console.log(data)
+
+    const [Bookmark] = useMutation(BOOKMARK);
+
+    const bookmarkSquare = async (e) => {
+        e.preventDefault();
+
+        const squareId = e.target.getAttribute('square-id');
+
+        const response = await Bookmark({
+            variables: {
+                user: userId,
+                square: squareId,
+            },
+        });
+    }
+
+    // const searchSquares = async (e) => {
+    //     e.preventDefault();
+
+    //     const search = e.target.value;
+
+    //     console.log(search)
+
+    //     const { loading, error, data } = useQuery(SEARCH_SQUARES, {
+    //         variables: { input },
+    //     });
+    
+    // }
 
     return (
         <>
@@ -39,10 +73,10 @@ const BlogFeed = () => {
                         <div className='square-actions'>
                             <div className='square-actions-1'>
                                 <div className='square-action-button square-like'>
-                                    <img src='images/heart-icon.png' width='22px'></img>
+                                    <img square-id={square._id} src='images/heart-icon.png' width='22px'></img>
                                 </div>
                                 <div className='square-action-button square-save'>
-                                    <img src='images/save.png' width='15px'></img>
+                                    <img onClick={bookmarkSquare} src='images/save.png' width='15px'></img>
                                 </div>
                                 <div className='square-action-button square-remove'>
                                     <img src='images/x-icon.png' width='19px'></img>

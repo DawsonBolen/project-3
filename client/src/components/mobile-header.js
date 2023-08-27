@@ -66,7 +66,7 @@ const MobileHeader = () => {
                             </div>
                         </Link>
 
-                        <Link to='/Save' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
+                        <Link to='/Saved' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container save-container'>
                                 <div className='save'>
                                     <img src='images/save.png' height='25px'></img>

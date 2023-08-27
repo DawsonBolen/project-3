@@ -8,6 +8,14 @@ query ($id: ID!) {
     _id
     username
     email
+    squares {
+      _id
+      name
+      shortDescription
+      longDescription
+      postCount
+      likes
+    }
   }
 }
 `
@@ -42,11 +50,26 @@ query GET_SQUARE($id: ID!) {
         username
       }
       comments {
+        _id
         user {
+          _id
           username
         }
         commentBody
       }
     }
+  }
+}`
+
+export const SEARCH_SQUARES = gql`
+query SEARCH_SQUARES($name: String!) {
+  searchSquares(name: $name) {
+    _id
+    createdAt
+    likes
+    postCount
+    name
+    shortDescription
+    longDescription
   }
 }`

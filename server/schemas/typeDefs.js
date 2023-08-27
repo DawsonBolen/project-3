@@ -57,6 +57,7 @@ const typeDefs = gql`
         squares: [Square]
         square(_id: ID!): Square
         posts: [Post]
+        searchSquares(name: String!): [Square]
     }
 
     type Mutation {

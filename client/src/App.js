@@ -16,6 +16,8 @@ import Profile from './components/pages/profile';
 import CreateSquare from './components/pages/createSquare';
 import SquareView from './components/pages/squareView';
 
+import Auth from './utils/auth';
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -39,14 +41,24 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const loggedIn = Auth.loggedIn();
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <Header />
         <div className='container'>
+          {!loggedIn ? (
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route 
+                path="*" 
+                element={<Welcome />} 
+              />
+            </Routes>
+          ) : (
           <Routes>
-            <Route path="/" element={<Welcome />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Explore" element={<Explore />} />
             <Route path="/Saved" element={<Saved />} />
@@ -54,6 +66,7 @@ function App() {
             <Route path='/Post' element={<CreateSquare />} />
             <Route path='/SquareView/:id' element={<SquareView />} />
           </Routes>
+          )}
         </div>
         <Footer />
       </Router>

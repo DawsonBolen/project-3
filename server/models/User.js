@@ -43,7 +43,8 @@ const userSchema = new Schema({
   squares: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Square'
+      ref: 'Square',
+      unique: true
     }
   ],
   createdAt: {

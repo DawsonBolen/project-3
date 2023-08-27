@@ -17,7 +17,8 @@ const squareSchema = new Schema({
     users: [
         {
           type: Schema.Types.ObjectId,
-          ref: 'User'
+          ref: 'User',
+          unique: true
         }
     ],
     posts: [
@@ -39,6 +40,8 @@ squareSchema.virtual('likes').get(function () {
 squareSchema.virtual('postCount').get(function () {
     return this.posts ? this.posts.length : 0;
 });
+
+squareSchema.index({ name: 'text' });
 
 const Square = mongoose.model('Square', squareSchema);
 
