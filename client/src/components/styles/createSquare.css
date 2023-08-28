@@ -1,5 +1,4 @@
 #create-square {
-    width: 50%;
     margin: 2em auto;
 }
 
@@ -15,14 +14,18 @@
 
 .create-square-body {
     text-align: center;
-    margin-top: 2em;
+    margin: 2em auto;
+    min-height: 100vh;
+    width: 80%;
 }
+
+
 
 .create-square-body h1 {
     font-size: 2em;
 }
 
-.create-square {
+#create-square {
     width: 100%;
     height: 35px;
     border: none;
@@ -31,7 +34,7 @@
     background-color: #577399;
 }
 
-.create-square:hover {
+#create-square:hover {
     background-color: #FE5F55;
 }
 
@@ -46,6 +49,7 @@
 
 #Summary-label {
     margin-bottom: 5px;
+    color: #577399;
 }
 
 @media screen and (max-width: 1200px) {
