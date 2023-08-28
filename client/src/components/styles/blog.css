@@ -96,11 +96,11 @@
     height: 30px;
     align-items: center;
     justify-content: space-around;
-
 }
 
 .view-square:hover {
     background-color: #FE5F55;
+    cursor: pointer;
 }
 
 .likes-total {

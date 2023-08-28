@@ -12,8 +12,9 @@ const MobileHeader = () => {
             <nav className='mobile-nav'>
 
                 <div className='mobile-nav-top'>
-                    <img className='logo-mobile' src='images/square-share-logo.png' height='50px'></img>
-
+                    <Link to={'/Home'}>
+                        <img className='logo-mobile' src='images/square-share-logo.png' height='50px'></img>
+                    </Link>
 
                     <div className='search'>
                         <form className='search-bar'>
@@ -66,7 +67,7 @@ const MobileHeader = () => {
                             </div>
                         </Link>
 
-                        <Link to='/Save' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
+                        <Link to='/Saved' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container save-container'>
                                 <div className='save'>
                                     <img src='images/save.png' height='25px'></img>

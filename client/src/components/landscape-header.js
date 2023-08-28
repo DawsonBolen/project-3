@@ -6,7 +6,11 @@ const LandscapeHeader = () => {
         <header>
             <nav className='main-nav'>
 
+
+                 <Link to={'/Home'}>
                 <img src={process.env.PUBLIC_URL + '/images/square-share-logo.png'} height='75px'></img>
+                </Link>
+
 
 
                 <div className='search'>
@@ -17,23 +21,37 @@ const LandscapeHeader = () => {
                         </button>
                     </form>
                 </div>
-                <div className='user'>
-                    <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
-                </div>
 
+
+
+                <Link to={'/Profile'}>
+                    <div className='user'>
+                         <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
+                    </div>
+                </Link>
+                
                 <div className='main-links'>
+
                     <Link className='nav-link-style' to='/Post'>
                         <div className='post'>
                             <img src={process.env.PUBLIC_URL + '/images/post.png'} height='25px'></img>
                         </div>
                     </Link>
-                    <div className='save'>
-                        <img src={process.env.PUBLIC_URL + '/images/save.png'} height='25px'></img>
-                    </div>
 
-                    <div className='explore'>
-                        <img src={process.env.PUBLIC_URL + '/images/explore.png'} height='25px'></img>
-                    </div>
+
+                    <Link to={'/Saved'}>
+                        <div className='save'>
+                            <img src={process.env.PUBLIC_URL + '/images/save.png'} height='25px'></img>
+                        </div>
+                    </Link>
+
+                    <Link to={'/Explore'}>
+                        <div className='explore'>
+                            <img src={process.env.PUBLIC_URL + '/images/explore.png'} height='25px'></img>
+                        </div>
+
+                    </Link>
+
                     <Link className='nav-link-style' to='/Home'>
                         <div className='home'>
                             <img src={process.env.PUBLIC_URL + '/images/home-icon.png'} height='25px'></img>

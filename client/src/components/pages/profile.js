@@ -27,6 +27,7 @@ const Profile = () => {
         <div className="profile-info">
           <h2>{data.user.username}</h2>
           <p>{data.user.email}</p>
+          <button onClick={Auth.logout}>Logout</button>
         </div>
       </div>
       <div className="profile-stats">

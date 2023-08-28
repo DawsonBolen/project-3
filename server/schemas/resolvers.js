@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Square, Post, Comment } = require('../models');
+const { User, Square, Post } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -7,14 +7,14 @@ const resolvers = {
         users: async (parent, args, context) => {
 
             const users = await User.find()
-            .populate('squares')
             .populate('posts');
 
             return users
         },
         user: async (parent, args, context) => {
 
-            const user = await User.findById(args);
+            const user = await User.findById(args)
+            .populate('bookmarkedSquares');
 
             return user
         },
@@ -29,20 +29,16 @@ const resolvers = {
 
             const square = await Square.findById(args)
             .populate('posts')
-            .populate('users')
             .populate(
                 {
                     path: 'posts',
-                    populate: { path: 'user' }
+                    populate: { 
+                        path: 'comments' ,
+                        populate: { path: 'user' }
+                    }
                 }
             )
-            .populate(
-                {
-                    path: 'posts.comments',
-                    populate: { path: 'user' }
-                }
-            );
-
+            ;
 
             return square
         },
@@ -58,6 +54,17 @@ const resolvers = {
 
             return posts
         },
+        searchSquares: async (parent, args, context) => {
+            const query = {
+                name: { $regex: args.name, $options: 'i' } 
+            };
+
+            console.log(query)
+
+            const squares = await Square.find(query)
+
+            return squares
+        }
     },
     Mutation: {
         login: async (parent, { email, password }) => {
@@ -84,7 +91,7 @@ const resolvers = {
           return { user, token };
         },
         createPost: async (parent, args, context) => {
-            // if (context.user) {
+            if (context.user) {
                 const post = await Post.create(args);
 
                 await User.findByIdAndUpdate(args.user, { $push: { posts: post }})
@@ -94,27 +101,55 @@ const resolvers = {
 
                 console.log(post)
                 return post;
-            // }
+            }
         },
         createSquare: async (parent, args, context) => {
-            const square = await Square.create(args);
-      
-            return square;
+            if (context.user) {
+
+                const square = await Square.create(args);
+        
+                return square;
+            }
+        },
+        likeSquare: async (parent, args, context) => {
+            if (context.user) {
+
+                await User.findByIdAndUpdate(args.user, { $addToSet: { likedSquares: args.square }})
+
+                await Square.findByIdAndUpdate(args.square, { $addToSet: { likes: args.user }})
+        
+                return args;
+            }
         },
         saveSquare: async (parent, args, context) => {
+            if (context.user) {
 
-            await User.findByIdAndUpdate(args.user, { $push: { squares: args.square }})
+                await User.findByIdAndUpdate(args.user, { $addToSet: { bookmarkedSquares: args.square }})
 
-            await Square.findByIdAndUpdate(args.square, { $push: { users: args.user }})
-      
-            return args;
+                await Square.findByIdAndUpdate(args.square, { $addToSet: { users: args.user }})
+        
+                return args;
+            }
+        },
+        removeBookmark: async (parent, args, context) => {
+            if (context.user) {
+
+                await User.findByIdAndUpdate(args.user, { $pull: { bookmarkedSquares: args.square}} )
+
+                await Square.findByIdAndUpdate(args.square, { $pull: { users: args.user }})
+        
+                return args;
+            }
         },
         addComment: async (parent, args, context) => {
-            console.log(args)
+            if (context.user) {
 
-            await Post.findByIdAndUpdate(args.post, { $push: { comments: args }})
-      
-            return args;
+                console.log(args)
+
+                await Post.findByIdAndUpdate(args.post, { $push: { comments: args }})
+        
+                return args;
+            }
         },
     },
 };

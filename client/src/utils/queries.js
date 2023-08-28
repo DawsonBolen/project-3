@@ -8,6 +8,17 @@ query ($id: ID!) {
     _id
     username
     email
+    bookmarkedSquares {
+      _id
+      name
+      shortDescription
+      longDescription
+      postCount
+      likesCount
+    }
+    likedSquares {
+      _id
+    }
   }
 }
 `
@@ -17,7 +28,7 @@ query GET_SQUARES {
   squares {
     _id
     createdAt
-    likes
+    likesCount
     postCount
     name
     shortDescription
@@ -33,7 +44,7 @@ query GET_SQUARE($id: ID!) {
     shortDescription
     longDescription
     postCount
-    likes
+    likesCount
     posts {
       _id
       postTitle
@@ -42,11 +53,26 @@ query GET_SQUARE($id: ID!) {
         username
       }
       comments {
+        _id
         user {
+          _id
           username
         }
         commentBody
       }
     }
+  }
+}`
+
+export const SEARCH_SQUARES = gql`
+query SEARCH_SQUARES($name: String!) {
+  searchSquares(name: $name) {
+    _id
+    createdAt
+    likes
+    postCount
+    name
+    shortDescription
+    longDescription
   }
 }`

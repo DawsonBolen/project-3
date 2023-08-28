@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import LandscapeHeader from "./landscape-header";
 import MobileHeader from "./mobile-header";
+import Auth from "../utils/auth";
 
 function Header() {
     const screenWidthChange = 992;
     const [isMobile, setIsMobile] = useState(window.innerWidth <= screenWidthChange);
+
+    const loggedIn = Auth.loggedIn();
 
     useEffect(() => {
         const handleResize = () => {
@@ -20,10 +23,15 @@ function Header() {
 
     return (
         <div>
-            {!isMobile ? (
-                <LandscapeHeader />
-            ) : <MobileHeader />}
-
+            {!loggedIn ? (
+                <div></div>
+            ):(
+                <div>
+                    {!isMobile ? (
+                        <LandscapeHeader />
+                    ) : <MobileHeader />}
+                </div>
+            )}
         </div>
     )
 }
