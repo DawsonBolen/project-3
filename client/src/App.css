@@ -5,7 +5,7 @@ a {
 }
 
 
-.post {
+.post-btn {
   width: 35px;
   height: 35px;
   background-color: #577399;
@@ -53,7 +53,7 @@ a {
   background-color: #FE5F55;
 }
 
-.post:hover {
+.post-btn:hover {
   background-color: #FE5F55;
 }
 

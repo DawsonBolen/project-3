@@ -69,9 +69,9 @@ const SquareView = () => {
     return (
         <>
 
-        { data ? (
-        <main className='square-view-main'>
-         <section className='square-view-intro'>
+            {data ? (
+                <main className='square-view-main'>
+                    <section className='square-view-intro'>
                         <div className='square-view-img' style={{ backgroundImage: `url(${data.square.image})` }}>
                         </div>
 
@@ -81,49 +81,49 @@ const SquareView = () => {
                             <p>{data.square.longDescription}</p>
                         </div>
                     </section>
-              {!post ? (
+                    {!post ? (
                         <button className='addpost' onClick={togglePostForm}>Add Post</button>
                     ) : (
                         <button className='addpost' onClick={togglePostForm}>Cancel</button>
                     )}
-            {!post ? (
-                <></>
-            ): (
-                <form onSubmit={addPost} className='post-form'>
-                <input onChange={handleChange} value={formData.title} name='title'></input>
-                <input onChange={handleChange} value={formData.body} name='body'></input>
-                <button type='submit'>submit</button>
-                </form>
-            )}
-            <section className='square-view-posts'>
-            {data.square.posts.map((post) => (
-                <div className='post' 
-                key={post._id}
-                post-id={post._id}
-                >
-                   <h2>{post.postTitle}</h2>
-                    <p>{post.postBody}</p>
-                    <p>{post.user.username}</p>
+                    {!post ? (
+                        <></>
+                    ) : (
+                        <form onSubmit={addPost} className='post-form'>
+                            <input onChange={handleChange} value={formData.title} name='title'></input>
+                            <input onChange={handleChange} value={formData.body} name='body'></input>
+                            <button type='submit'>submit</button>
+                        </form>
+                    )}
+                    <section className='square-view-posts'>
+                        {data.square.posts.map((post) => (
+                            <div className='post-bod'
+                                key={post._id}
+                                post-id={post._id}
+                            >
+                                <h2>{post.postTitle}</h2>
+                                <p>{post.postBody}</p>
+                                <p>{post.user.username}</p>
 
-                    {post.comments.map((comment) => (
-                        <h2 className="comment" key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
-                    ))}
+                                {post.comments.map((comment) => (
+                                    <h2 className="comment" key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
+                                ))}
 
-                    <form onSubmit={addComment} className='comment-form'>
-                    <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
-                    <button type='submit'>comment</button>
-                    </form>
+                                <form onSubmit={addComment} className='comment-form'>
+                                    <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
+                                    <button type='submit'>comment</button>
+                                </form>
 
-                </div>
-                
-            ))}
-            </section>
+                            </div>
 
-        </main>
-        ) : null}
-        {loading ? <img  alt="loading" /> : null}
-    </>
-)
+                        ))}
+                    </section>
+
+                </main>
+            ) : null}
+            {loading ? <img alt="loading" /> : null}
+        </>
+    )
 }
 
 export default SquareView
