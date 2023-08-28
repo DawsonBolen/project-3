@@ -7,8 +7,8 @@ const LandscapeHeader = () => {
             <nav className='main-nav'>
 
 
-                 <Link to={'/Home'}>
-                <img src={process.env.PUBLIC_URL + '/images/square-share-logo.png'} height='75px'></img>
+                <Link to={'/Home'}>
+                    <img src={process.env.PUBLIC_URL + '/images/square-share-logo.png'} height='75px'></img>
                 </Link>
 
 
@@ -26,14 +26,14 @@ const LandscapeHeader = () => {
 
                 <Link to={'/Profile'}>
                     <div className='user'>
-                         <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
+                        <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
                     </div>
                 </Link>
-                
+
                 <div className='main-links'>
 
-                    <Link className='nav-link-style' to='/Post'>
-                        <div className='post'>
+                    <Link to='/Post'>
+                        <div className='post-btn'>
                             <img src={process.env.PUBLIC_URL + '/images/post.png'} height='25px'></img>
                         </div>
                     </Link>
