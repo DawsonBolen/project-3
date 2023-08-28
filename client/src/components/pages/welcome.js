@@ -7,6 +7,18 @@ import '../styles/Welcome.css';
 import Auth from '../../utils/auth';
 
 function Welcome() {
+
+  const styles = {
+    welcomePic: {
+      backgroundImage: `url(${process.env.PUBLIC_URL}/images/welcome-background.png)`,
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
+      width: '100%',
+      height: '0',
+      paddingTop: '32.45%',
+    },
+  }
+
   const navigate = useNavigate();
   const [login, showLogin] = useState(false);
 
@@ -43,7 +55,7 @@ function Welcome() {
 
         const token = response.data.createUser.token;
         Auth.login(token);
-    
+
         navigate('/Home');
       } else {
         // Login logic using Apollo Client
@@ -73,7 +85,7 @@ function Welcome() {
 
   return (
     <main className='welcome'>
-      <div className='welcome-main'>
+      <div className='welcome-main' style={styles.welcomePic}>
         {/* Content for welcome-main */}
       </div>
       <div className='sign-in-form-body'>
