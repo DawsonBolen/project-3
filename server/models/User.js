@@ -44,14 +44,12 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Square',
-      unique: true
     }
   ],
   likedSquares: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Square',
-      unique: true
     }
   ],
   createdAt: {

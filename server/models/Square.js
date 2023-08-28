@@ -18,14 +18,12 @@ const squareSchema = new Schema({
         {
           type: Schema.Types.ObjectId,
           ref: 'User',
-          unique: true
         }
     ],
     users: [
         {
           type: Schema.Types.ObjectId,
           ref: 'User',
-          unique: true
         }
     ],
     posts: [
