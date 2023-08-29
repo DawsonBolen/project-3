@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { GET_SQUARE } from '../../utils/queries';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_POST } from '../../utils/mutation';
-import { ADD_COMMENT } from '../../utils/mutation';
+import { GET_SQUARE } from '../../utils/queries';
+import { CREATE_POST, ADD_COMMENT } from '../../utils/mutation';
 import Auth from '../../utils/auth';
 import '../styles/squareView.css';
+import Post from '../post';
 
 const SquareView = () => {
     const navigate = useNavigate();
@@ -97,25 +97,7 @@ const SquareView = () => {
                     )}
                     <section className='square-view-posts'>
                         {data.square.posts.map((post) => (
-                            <div className='post-bod'
-                                key={post._id}
-                                post-id={post._id}
-                            >
-                                <h2>{post.postTitle}</h2>
-                                <p>{post.postBody}</p>
-                                <p>{post.user.username}</p>
-
-                                {post.comments.map((comment) => (
-                                    <h2 className="comment" key={comment._id}>{comment.user.username} said: {comment.commentBody}</h2>
-                                ))}
-
-                                <form onSubmit={addComment} className='comment-form'>
-                                    <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
-                                    <button type='submit'>comment</button>
-                                </form>
-
-                            </div>
-
+                            <Post key={post._id} post={post} postId={post._id} />
                         ))}
                     </section>
 
