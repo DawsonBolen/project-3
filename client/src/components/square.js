@@ -113,11 +113,7 @@ const Square = ({ square }) => {
 
                         {!saved ? (
                             <div onClick={bookmarkSquare} square-id={square._id} className='square-action-button square-save'>
-
                                 <img src={process.env.PUBLIC_URL + '/images/save.png'} width='15px'></img>
-
-
-
                             </div>
                         ) : (
                             <div onClick={unBookmark} square-id={square._id} className='square-action-button square-save'>
