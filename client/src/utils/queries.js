@@ -6,9 +6,40 @@ export const GET_PROFILE = gql`
 query ($id: ID!) {
   user(_id: $id) {
     _id
+    savedCount
+    postCount
+    totalLikes
     username
     email
+    posts {
+      _id
+      postBody
+      postTitle
+      square{
+        _id
+        name
+      }
+      user {
+        _id
+        username
+      }
+      comments {
+        commentBody
+        user {
+          _id
+          username
+        }
+      }
+    }
     bookmarkedSquares {
+      _id
+      name
+      shortDescription
+      longDescription
+      postCount
+      likesCount
+    }
+    createdSquares {
       _id
       name
       shortDescription
@@ -33,6 +64,7 @@ query GET_SQUARES {
     name
     shortDescription
     longDescription
+    image
   }
 }`;
 
@@ -40,6 +72,7 @@ export const GET_SQUARE = gql`
 query GET_SQUARE($id: ID!) {
   square(_id: $id) {
     _id
+    image
     name
     shortDescription
     longDescription
@@ -47,6 +80,7 @@ query GET_SQUARE($id: ID!) {
     likesCount
     posts {
       _id
+      commentCount
       postTitle
       postBody
       user {

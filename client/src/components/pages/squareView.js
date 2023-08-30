@@ -21,6 +21,8 @@ const SquareView = () => {
         variables: { id },
     });
 
+    console.log('square data: ', data)
+
     console.log(data)
 
     const [formData, setData] = useState({ title: '', body: '' })
@@ -108,7 +110,7 @@ const SquareView = () => {
                         )}
                         <section className='square-view-posts'>
                             {data.square.posts.map((post) => (
-                                <Post key={post._id} post={post} postId={post._id} />
+                                <Post key={post._id} post={post} post-id={post._id} />
                             ))}
                         </section>
                     </div>
