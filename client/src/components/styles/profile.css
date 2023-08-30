@@ -5,6 +5,12 @@
 
 }
 
+.profile-container {
+    min-height: 100vh;
+    width: 60%;
+    margin: 0 auto;
+}
+
 .user-icon-img {
     background-color: #495867;
 
@@ -17,4 +23,132 @@
 .profile-2 h5 {
     font-size: 2em;
     margin-bottom: 1em;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10%;
+    align-items: center;
+    padding: 0 20%;
+
+}
+
+.logout-btn {
+    color: white;
+    background-color: #495867;
+    border: none;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 1em;
+
+}
+
+.user-email {
+    margin-top: 1em;
+}
+
+.logout-btn:hover {
+    background-color: #FE5F55;
+}
+
+.profile-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.p2-1 {
+    display: flex;
+}
+
+.profile-stats {
+    display: flex;
+    margin: 1em 0;
+}
+
+.saved-post-count {
+    margin: 0 2em;
+}
+
+.p2-1 h2 {
+    font-size: 20px;
+    margin-right: 1em;
+}
+
+.edit-profile {
+    border: none;
+    border-radius: 5px;
+    background-color: #495867;
+    color: white;
+    padding: 3px;
+}
+
+.edit-profile:hover {
+    background-color: #FE5F55;
+}
+
+
+.profile-line {
+    width: 100%;
+    height: 3px;
+    background-color: #e6e6e6;
+    margin: 1em auto;
+}
+
+.profilepage-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-control-btns {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5em;
+}
+
+.profile-control-btns:hover {
+    background-color: #e6e6e6;
+
+}
+
+.active-control {
+    border-bottom: 2px solid #BDD5EA;
+}
+
+
+#profile-posts {
+    margin: 0 2em;
+}
+
+.profile-control-btns p {
+    margin-left: 3px;
+}
+
+
+/* 
+.profile-avatar {
+    margin-right: 3em;
+}
+
+.profile-info {
+    margin-left: 3em;
+} */
+
+
+@media screen and (max-width: 992px) {
+    .profile-container {
+        height: 100vh;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        height: 100vh;
+        width: 95%;
+        margin: 0 auto;
+    }
 }

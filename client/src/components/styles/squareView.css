@@ -11,15 +11,31 @@
 .square-view-main {
     min-height: 100vh;
     display: flex;
+    justify-content: space-between;
+}
+
+.square-main-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80%;
 }
 
 .square-view-intro {
     display: flex;
-    width: 80%;
+    width: 100%;
     margin: 3rem auto;
     justify-content: space-between;
+}
+
+.square-view-nav {
+    width: 16%;
+    background-color: #495867;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
 }
 
 
@@ -32,9 +48,6 @@
 
 }
 
-.square-view-intro {
-    width: 68%;
-}
 
 .square-view-intro h1 {
     font-size: 30px;
@@ -54,20 +67,26 @@
 
 .addpost {
     width: 80%;
-    background-color: #495867;
-    color: white;
+    background-color: #F7F7FF;
+    color: #495867;
     cursor: pointer;
     margin: 0 auto;
 }
 
 .square-view-posts {
-    width: 80%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
 }
 
-.post-body {
+.post-main-bod {
     width: 100%;
     background-color: #F7F7FF;
     padding: 1em;
+    border: 1px solid #495867;
+}
+
+.post-body {
     margin-bottom: 1em;
 }
 
@@ -85,4 +104,109 @@
     width: 15px;
     height: 15px;
 
+}
+
+
+.post-form-bod {
+    width: 80%;
+    z-index: 100;
+    position: fixed;
+    top: 150px;
+    bottom: 50px;
+    right: 25px;
+    background-color: #577399;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.x-button-post {
+    display: flex;
+    align-self: flex-end;
+    justify-self: flex-start;
+    margin-right: 2em;
+    position: fixed;
+    top: 170px;
+}
+
+.x-button-post div {
+    background-color: white;
+    width: 2px;
+    height: 20px;
+
+}
+
+.x-button-post:hover>div {
+    background-color: #FE5F55;
+}
+
+.x-button-post :nth-child(1) {
+    transform: translatex(2px) rotate(45deg);
+}
+
+.x-button-post :nth-child(2) {
+    transform: rotate(-45deg);
+}
+
+
+.post-form-line {
+    width: 70%;
+    height: 3px;
+    background-color: white;
+    margin-bottom: 2em;
+}
+
+.post-form-bod h1 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 0.25em;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.post-form-btn {
+    background-color: #FE5F55;
+    border: none;
+    color: white;
+    height: 30px;
+}
+
+.post-form-btn:hover {
+    background-color: white;
+    color: #495867;
+}
+
+
+.post-title-input {
+    border: none;
+    height: 30px;
+    padding: 15px;
+    margin-bottom: 0.5em;
+}
+
+.post-content-input {
+    border: none;
+    height: 150px;
+    padding: 15px;
+    margin-bottom: 1em;
+}
+
+
+.user-post-title {
+    display: flex;
+    align-items: center;
+}
+
+.user-post-title p {
+    margin-left: 4px;
+}
+
+.post-comments {
+    background-color: #F7F7FF;
 }
