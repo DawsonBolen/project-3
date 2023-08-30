@@ -12,18 +12,24 @@ const typeDefs = gql`
         lastName: String
         username: String
         fullName: String
+        image: String
         email: String
         password: String
         friends: [User]
         friendCount: String
         posts: [Post]
+        postCount: String
+        createdSquares: [Square]
         likedSquares: [Square]
+        totalLikes: String
         bookmarkedSquares: [Square]
+        savedCount: String
         createdAt: String
     }
 
     type Post {
         _id: ID
+        image: String
         postTitle: String
         postBody: String
         user: User
@@ -45,6 +51,7 @@ const typeDefs = gql`
         name: String
         shortDescription: String
         longDescription: String
+        image: String
         likesCount: String
         postCount: String
         users: [User]
@@ -82,6 +89,7 @@ const typeDefs = gql`
             name: String!
             shortDescription: String!
             longDescription: String!
+            image: String!
         ): Square
         saveSquare(
             user: ID!

@@ -14,6 +14,9 @@ const squareSchema = new Schema({
     longDescription: {
         type: String,
     },
+    image: {
+        type: String,
+    },
     likes: [
         {
           type: Schema.Types.ObjectId,

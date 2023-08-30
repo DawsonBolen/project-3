@@ -5,6 +5,9 @@ const Comment = require('./Comment');
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
+    image: {
+        type: String,
+    },
     postTitle: {
         type: String,
         required: true,

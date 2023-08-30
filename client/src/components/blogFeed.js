@@ -11,8 +11,6 @@ const BlogFeed = () => {
     // const profile = Auth.getProfile();
     // const userId = profile.data._id
 
-
-
     const { loading, data } = useQuery(GET_SQUARES);
 
     // const [Bookmark] = useMutation(BOOKMARK);

@@ -4,6 +4,9 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
+  image: {
+    type: String,
+  },
   firstName: {
     type: String,
     trim: true,
@@ -38,6 +41,12 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Post'
+    }
+  ],
+  createdSquares: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Square',
     }
   ],
   bookmarkedSquares: [
@@ -82,6 +91,27 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual('friendCount').get(function () {
   return this.friends ? this.friends.length : 0;
+});
+
+userSchema.virtual('totalLikes').get(function () {
+  if (!this.createdSquares || this.createdSquares.length === 0) {
+    return 0;
+  }
+
+  let totalLikes = 0;
+  for (const createdSquare of this.createdSquares) {
+    totalLikes += createdSquare.likesCount || 0;
+  }
+  
+  return totalLikes;
+});
+
+userSchema.virtual('postCount').get(function () {
+  return this.posts ? this.posts.length : 0;
+});
+
+userSchema.virtual('savedCount').get(function () {
+  return this.bookmarkedSquares ? this.bookmarkedSquares.length : 0;
 });
 
 userSchema.virtual('fullName').get(function() {

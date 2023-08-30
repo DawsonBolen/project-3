@@ -5,6 +5,8 @@ import { GET_PROFILE } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import '../styles/profile.css';
 import Saved from './saved';
+import Post from '../post';
+import Square from '../square';
 
 const Profile = () => {
 
@@ -16,6 +18,7 @@ const Profile = () => {
     variables: { id },
   });
 
+  console.log(data)
 
   const [activeSection, setActiveSection] = useState('saved');
 
@@ -48,9 +51,9 @@ const Profile = () => {
             <button className='edit-profile'>Edit Profile</button>
           </div>
           <div className='profile-stats'>
-            <p>3 Posts</p>
-            <p className='saved-post-count'>5 Saved</p>
-            <p>20 Likes</p>
+            <p>{data.user.postCount} Posts</p>
+            <p className='saved-post-count'>{data.user.savedCount} Saved</p>
+            <p>{data.user.totalLikes} Likes</p>
           </div>
           <p className='user-email'>{data.user.email}</p>
           <button className='logout-btn' onClick={Auth.logout}>Logout</button>
@@ -81,9 +84,17 @@ const Profile = () => {
             <Saved />
           </div>
         ) : activeSection === 'posts' ? (
-          <p>posts</p>
+          <section className='square-view-posts'>
+            {data.user.posts.map((post) => (
+                <Post key={post._id} post={post} postId={post._id} />
+            ))}
+          </section>
         ) : (
-          <p>squares</p>
+          <section className='profile-squares'>
+            {data && data.user.createdSquares.map((square) => (
+              <Square key={square._id} square={square} />
+            ))}
+          </section>
         )}
       </div>
     </main>

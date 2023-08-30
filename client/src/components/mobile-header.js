@@ -13,14 +13,14 @@ const MobileHeader = () => {
 
                 <div className='mobile-nav-top'>
                     <Link to={'/Home'}>
-                        <img className='logo-mobile' src='images/square-share-logo.png' height='50px'></img>
+                        <img className='logo-mobile' src={process.env.PUBLIC_URL + '/images/square-share-logo.png'} height='50px'></img>
                     </Link>
 
                     <div className='search'>
                         <form className='search-bar'>
                             <input type='text' placeholder='Search' className='search-string'></input>
                             <button className='search-button'>
-                                <img src='images/newsearchicon.png' width='20px'></img>
+                                <img src={process.env.PUBLIC_URL + '/images/newsearchicon.png'} width='20px'></img>
                             </button>
                         </form>
                     </div>
@@ -49,7 +49,7 @@ const MobileHeader = () => {
                         <Link to='/Profile' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container user-container'>
                                 <div className='user'>
-                                    <img src='images/user-icon.png' width='45px'></img>
+                                    <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
                                 </div>
                                 <p>Profile</p>
                             </div>
@@ -57,9 +57,9 @@ const MobileHeader = () => {
                         <Link to='/Post' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container post-container'>
 
-                                <div className='post'>
+                                <div className='post-btn'>
 
-                                    <img src='images/post.png' height='25px'></img>
+                                    <img src={process.env.PUBLIC_URL + '/images/post.png'} height='25px'></img>
 
                                 </div>
                                 <p>Create</p>
@@ -70,7 +70,7 @@ const MobileHeader = () => {
                         <Link to='/Saved' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container save-container'>
                                 <div className='save'>
-                                    <img src='images/save.png' height='25px'></img>
+                                    <img src={process.env.PUBLIC_URL + '/images/save.png'} height='25px'></img>
                                 </div>
                                 <p>Saved</p>
                             </div>
@@ -79,7 +79,7 @@ const MobileHeader = () => {
                         <Link to='/Explore' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container explore-container'>
                                 <div className='explore'>
-                                    <img src='images/explore.png' height='25px'></img>
+                                    <img src={process.env.PUBLIC_URL + '/images/explore.png'} height='25px'></img>
                                 </div>
                                 <p>Explore</p>
                             </div>

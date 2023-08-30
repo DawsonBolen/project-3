@@ -74,7 +74,7 @@ const Square = ({ square }) => {
             key={square._id}
             className="square"
         >
-            <div className='square-img' style={{ backgroundImage: `url${square.image})` }}>
+            <div className='square-img' style={{ backgroundImage: `url(${square.image})` }}>
 
             </div>
             <div className='square-description'>

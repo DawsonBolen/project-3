@@ -8,6 +8,7 @@ import './styles/squareView.css';
 
 
 const Post = ({ post }) => {
+    console.log(post)
     const profile = Auth.getProfile();
     const userId = profile.data._id
     const [AddComment] = useMutation(ADD_COMMENT);
@@ -31,15 +32,11 @@ const Post = ({ post }) => {
     const addComment = async (e) => {
         e.preventDefault();
 
-        const postId = e.target.parentElement.getAttribute('post-id');
-
-        console.log(formData.commentBody, userId, postId)
-
         const response = await AddComment({
             variables: {
                 commentBody: formData.commentBody,
                 user: userId,
-                post: postId,
+                post: post._id,
             },
         });
     }
