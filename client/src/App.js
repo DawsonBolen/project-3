@@ -1,9 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context'
-import '../src/App.css' 
+import '../src/App.css'
 
 import Header from './components/header';
 import Footer from './components/footer';
@@ -43,35 +43,44 @@ const client = new ApolloClient({
 
 const loggedIn = Auth.loggedIn();
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <Header />
         <div className='container'>
-          {!loggedIn ? (
-            <Routes>
-              <Route path="/" element={<Welcome />} />
-              <Route 
-                path="*" 
-                element={<Welcome />} 
-              />
-            </Routes>
-          ) : (
           <Routes>
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Explore" element={<Explore />} />
-            <Route path="/Saved" element={<Saved />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path='/Post' element={<CreateSquare />} />
-            <Route path='/SquareView/:id' element={<SquareView />} />
+            {loggedIn ? (
+              <>
+                <Route path="/Home" element={<Home />} />
+                <Route path="/Explore" element={<Explore />} />
+                <Route path="/Saved" element={<Saved />} />
+                <Route path="/Profile" element={<Profile />} />
+                <Route path='/Post' element={<CreateSquare />} />
+                <Route path='/SquareView/:id' element={<SquareView />} />
+                {/* Add a default route to the home page */}
+                <Route path="*" element={<Home />} />
+              </>
+            ) : (
+              <>
+                <Route path="/" element={<Welcome />} />
+                <Route path="*" element={<Welcome />} />
+              </>
+            )}
           </Routes>
-          )}
         </div>
         <Footer />
       </Router>
     </ApolloProvider>
   );
 }
+
+//square 2
+
+
+
+
+
 
 export default App;

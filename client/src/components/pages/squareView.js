@@ -71,36 +71,47 @@ const SquareView = () => {
 
             {data ? (
                 <main className='square-view-main'>
-                    <section className='square-view-intro'>
-                        <div className='square-view-img' style={{ backgroundImage: `url(${data.square.image})` }}>
-                        </div>
+                    <div className='square-view-nav'>
+                        {!post ? (
+                            <button className='addpost' onClick={togglePostForm}>Add Post</button>
+                        ) : (
+                            <button className='addpost' onClick={togglePostForm}>Cancel</button>
+                        )}
+                    </div>
+                    <div className='square-main-content'>
+                        <section className='square-view-intro'>
+                            <div className='square-view-img' style={{ backgroundImage: `url(${data.square.image})` }}>
+                            </div>
 
-                        <div className='square-view-intro-description'>
-                            <h1>{data.square.name}</h1>
-                            <h4>{data.square.shortDescription}</h4>
-                            <p>{data.square.longDescription}</p>
-                        </div>
-                    </section>
-                    {!post ? (
-                        <button className='addpost' onClick={togglePostForm}>Add Post</button>
-                    ) : (
-                        <button className='addpost' onClick={togglePostForm}>Cancel</button>
-                    )}
-                    {!post ? (
-                        <></>
-                    ) : (
-                        <form onSubmit={addPost} className='post-form'>
-                            <input onChange={handleChange} value={formData.title} name='title'></input>
-                            <input onChange={handleChange} value={formData.body} name='body'></input>
-                            <button type='submit'>submit</button>
-                        </form>
-                    )}
-                    <section className='square-view-posts'>
-                        {data.square.posts.map((post) => (
-                            <Post key={post._id} post={post} postId={post._id} />
-                        ))}
-                    </section>
-
+                            <div className='square-view-intro-description'>
+                                <h1>{data.square.name}</h1>
+                                <h4>{data.square.shortDescription}</h4>
+                                <p>{data.square.longDescription}</p>
+                            </div>
+                        </section>
+                        {!post ? (
+                            <></>
+                        ) : (
+                            <div className='post-form-bod'>
+                                <div onClick={togglePostForm} className='x-button-post'>
+                                    <div className='exit-btn-1'></div>
+                                    <div className='exit-btn-1'></div>
+                                </div>
+                                <h1>Add Post</h1>
+                                <div className='post-form-line'></div>
+                                <form onSubmit={addPost} className='post-form'>
+                                    <input placeholder='title' className='post-title-input' onChange={handleChange} value={formData.title} name='title'></input>
+                                    <input placeholder='main post' className='post-content-input' onChange={handleChange} value={formData.body} name='body'></input>
+                                    <button className='post-form-btn' type='submit'>Post</button>
+                                </form>
+                            </div>
+                        )}
+                        <section className='square-view-posts'>
+                            {data.square.posts.map((post) => (
+                                <Post key={post._id} post={post} postId={post._id} />
+                            ))}
+                        </section>
+                    </div>
                 </main>
             ) : null}
             {loading ? <img alt="loading" /> : null}
