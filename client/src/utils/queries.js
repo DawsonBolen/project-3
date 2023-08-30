@@ -80,6 +80,7 @@ query GET_SQUARE($id: ID!) {
     likesCount
     posts {
       _id
+      commentCount
       postTitle
       postBody
       user {

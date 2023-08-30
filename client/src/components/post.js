@@ -56,7 +56,7 @@ const Post = ({ post }) => {
                 </div>
                 <h2>{post.postTitle}</h2>
                 <p>{post.postBody}</p>
-                <p onClick={toggleShowComments}>View 16 Comments</p>
+                <p onClick={toggleShowComments}>View {post.commentCount} Comments</p>
 
 
 

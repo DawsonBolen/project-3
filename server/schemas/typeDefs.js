@@ -35,6 +35,7 @@ const typeDefs = gql`
         user: User
         square: Square
         comments: [Comment]
+        commentCount: String
         createdAt: String
     }
 
