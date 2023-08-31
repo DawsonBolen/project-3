@@ -50,13 +50,19 @@ const Post = ({ post }) => {
             post-id={post._id}
         >
             <div className='post-main-bod'>
-                <div className='user-post-title'>
-                    <img src={process.env.PUBLIC_URL + '/images/user-icon-small.png'} width='10px'></img>
-                    <p>{post.user.username}</p>
+                <div className='post-main-bod-1'>
+                    <h2 className='post-title'>{post.postTitle}</h2>
+                    <div className='user-post-title'>
+                        <img src={process.env.PUBLIC_URL + '/images/user-icon-small.png'} width='14px'></img>
+                        <p>{post.user.username}</p>
+                    </div>
                 </div>
-                <h2>{post.postTitle}</h2>
+
                 <p>{post.postBody}</p>
-                <p onClick={toggleShowComments}>View {post.commentCount} Comments</p>
+                <div onClick={toggleShowComments} className='comments-view-btn'>
+                    <img src={process.env.PUBLIC_URL + '/images/posts-icon.png'} width='14px'></img>
+                    <p className='comment-label'>Comments</p>
+                </div>
 
 
 
@@ -66,16 +72,36 @@ const Post = ({ post }) => {
                 <></>
             ) : (
                 <div className='comment-main'>
+                    <div className='comment-control'>
+                        <form onSubmit={addComment} className='comment-form'>
+                            <input placeholder='add Comment' className='comment-input' onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
+                            <button className='comment-post' type='submit'>
+                                <img src={process.env.PUBLIC_URL + '/images/post.png'} width='14px'></img>
+                            </button>
+                        </form>
+                        <h5>{post.commentCount} Total Comments</h5>
+                        <div onClick={toggleShowComments} className='x-button-comment'>
+                            <div className='comment-exit-btn-1'></div>
+                            <div className='comment-exit-btn-1'></div>
+                        </div>
+                    </div>
                     <div className='post-comments'>
+
                         {post.comments.map((comment) => (
-                            <p className="comment" key={comment._id}>{comment.user.username} said: {comment.commentBody}</p>
+                            <div key={comment._id} className='comment-bod'>
+                                <div className='comment-bod-user'>
+                                    <img src={process.env.PUBLIC_URL + '/images/user-icon-small.png'} width='14px' height='14px'></img>
+                                    <p>{comment.user.username}</p>
+                                </div>
+                                <div className='comment-content'>
+                                    <p>{comment.commentBody}</p>
+                                </div>
+
+                            </div>
                         ))}
 
                     </div>
-                    <form onSubmit={addComment} className='comment-form'>
-                        <input onChange={handleChange} value={formData.commentBody} name='commentBody'></input>
-                        <button type='submit'>comment</button>
-                    </form>
+
                 </div>
             )}
         </div>
