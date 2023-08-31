@@ -16,6 +16,8 @@ const Post = ({ post }) => {
     const [comments, showComments] = useState(false);
     const [commentForm, showCommentForm] = useState(false);
 
+    const [commentData, setCommentData] = useState(post.comments);
+
     const toggleCommentForm = () => {
         showCommentForm(!commentForm)
     }
@@ -39,6 +41,8 @@ const Post = ({ post }) => {
                 post: post._id,
             },
         });
+        const newComment = response.data.addComment;
+        setCommentData([...commentData, newComment]);
     }
 
 
@@ -87,7 +91,7 @@ const Post = ({ post }) => {
                     </div>
                     <div className='post-comments'>
 
-                        {post.comments.map((comment) => (
+                        {commentData.map((comment) => (
                             <div key={comment._id} className='comment-bod'>
                                 <div className='comment-bod-user'>
                                     <img src={process.env.PUBLIC_URL + '/images/user-icon-small.png'} width='14px' height='14px'></img>

@@ -9,6 +9,7 @@ import Auth from '../../utils/auth';
 import '../styles/squareView.css';
 import Post from '../post';
 import ReactDOM from 'react-dom';
+import { GET_POSTS } from '../../utils/queries';
 
 const SquareView = () => {
     const navigate = useNavigate();
@@ -43,6 +44,7 @@ const SquareView = () => {
                 user: userId,
                 square: id,
             },
+            refetchQueries: [{ query: GET_POSTS }],
         });
         togglePostForm();
 
@@ -111,7 +113,7 @@ const SquareView = () => {
                 <main className='square-view-main'>
                     <div className='square-view-nav'>
                         <div className='square-nav-control'>
-                            <h2>{data.square.name}</h2>
+                            <h2 className='square-nav-name'>{data.square.name}</h2>
                             {!post ? (
                                 <button className='addpost' onClick={togglePostForm}>Add Post</button>
                             ) : (

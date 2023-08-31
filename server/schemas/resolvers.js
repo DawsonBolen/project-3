@@ -115,11 +115,8 @@ const resolvers = {
         },
         createSquare: async (parent, args, context) => {
             if (context.user) {
-                console.log(context.user._id)
 
                 const square = await Square.create(args);
-
-                console.log(square)
 
                 await User.findByIdAndUpdate(context.user._id, { $addToSet: { createdSquares: square._id } })
 
@@ -166,6 +163,14 @@ const resolvers = {
                 return args;
             }
         },
+        editUser: async (parent, args, context) => {
+            if (context.user) {
+
+                const updatedUser = await User.findByIdAndUpdate(context.user._id, { $set: { image: args.image }}, { new: true })
+
+                return updatedUser
+            }
+        }
     },
 };
 
