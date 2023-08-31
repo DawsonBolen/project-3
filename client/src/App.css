@@ -5,6 +5,24 @@ a {
 }
 
 
+h1 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+}
+
+h2 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+}
+
+h3 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+}
+
+
+
+
 .post-btn {
   width: 35px;
   height: 35px;
@@ -123,6 +141,19 @@ a {
   background-color: #FE5F55;
 }
 
+
+.user-mobile {
+  background-color: #577399;
+  border-radius: 100%;
+  display: flex;
+  width: 40px;
+  height: 40px;
+}
+
+.user-mobile:hover {
+  background-color: #FE5F55;
+}
+
 footer {
   background-color: #495867;
   width: 100%;
@@ -191,7 +222,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #BDD5EA;
   position: fixed;
   top: 0;

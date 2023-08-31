@@ -48,8 +48,8 @@ const MobileHeader = () => {
 
                         <Link to='/Profile' onClick={toggleShowNav} style={{ color: '#495867', textDecoration: 'none' }}>
                             <div className='nav-container user-container'>
-                                <div className='user'>
-                                    <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='45px'></img>
+                                <div className='user-mobile'>
+                                    <img src={process.env.PUBLIC_URL + '/images/user-icon.png'} width='40px'></img>
                                 </div>
                                 <p>Profile</p>
                             </div>
