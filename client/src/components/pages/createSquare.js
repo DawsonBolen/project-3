@@ -15,7 +15,7 @@ const CreateSquare = () => {
 
     const [formData, setData] = useState({ name: '', shortDescription: '', longDescription: '' })
 
-    const [postImage, setPostImage] = useState({ image: ''})
+    const [postImage, setPostImage] = useState({ image: '' })
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -53,11 +53,15 @@ const CreateSquare = () => {
     return (
         <main className='create-square-body'>
             <h1>Create A New Square</h1>
+            <div id='create-square-line'></div>
             <form onSubmit={handleFormSubmit} id='create-square'>
                 <input onChange={handleChange} value={formData.name} className='create-input' type='text' placeholder='Name' name='name'></input>
                 <input onChange={handleChange} value={formData.shortDescription} className='create-input' type='text' placeholder='Short Description' name='shortDescription'></input>
-    
-                <input onChange={(e) => handleFileUpload(e)}className='create-input' type='file' accept='.jpeg, .png, .jpg' placeholder='Image Url' name='image'></input>
+                <div className='image-upload-input'>
+                    <h3>Upload Image</h3>
+
+                    <input onChange={(e) => handleFileUpload(e)} type='file' accept='.jpeg, .png, .jpg' placeholder='Image Url' name='image'></input>
+                </div>
                 <h5 id='Summary-label'>Summary</h5>
                 <textarea onChange={handleChange} value={formData.longDescription} id='summary' type='text' name='longDescription'></textarea>
                 <button onClick={handleFormSubmit} type='submit' className='create-square'>Create Square</button>
@@ -69,7 +73,7 @@ const CreateSquare = () => {
 
 export default CreateSquare
 
-function convertToBase64(file){
+function convertToBase64(file) {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);

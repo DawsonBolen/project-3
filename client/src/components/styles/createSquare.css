@@ -20,6 +20,60 @@
 }
 
 
+.create-square-body h1 {
+    color: #577399;
+}
+
+/* input[type="file"] {
+    opacity: 0;
+    
+} */
+
+#create-square-line {
+    width: 100%;
+    height: 3px;
+    background-color: #FE5F55;
+    margin-top: 5px;
+}
+
+.image-upload-input {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    background-color: #F7F7FF;
+    height: 35px;
+    border-radius: 35px;
+    padding: 15px;
+}
+
+.image-upload-input h3 {
+    color: #577399;
+    margin-right: 3em;
+}
+
+.upload-icon {
+    width: 22px;
+    height: 22px;
+    background-color: #FE5F55;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-icon:hover {
+    background-color: #577399;
+}
+
+.upload-icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.upload-icon-text p {
+    margin-left: 5px;
+}
 
 .create-square-body h1 {
     font-size: 2em;
