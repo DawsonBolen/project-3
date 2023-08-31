@@ -1,12 +1,42 @@
-import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { GET_SQUARES } from '../utils/queries';
 
 const MobileHeader = () => {
     const [show, showNav] = useState(false);
+    const [searchString, setSearchString] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+
+    const { loading, data } = useQuery(GET_SQUARES);
 
     const toggleShowNav = () => {
         showNav(!show)
     }
+
+    useEffect(() => {
+        if (searchString) {
+            const results = queryData(searchString);
+            setSuggestions(results);
+        } else {
+            setSuggestions([]);
+        }
+    }, [searchString]);
+
+    const queryData = (query) => {
+        const queryData = data?.squares;
+        return queryData.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchString) {
+            const newUrl = new URL(window.location.origin);
+            newUrl.searchParams.set('search_term', searchString);
+            window.location.href = newUrl.toString();
+        }
+    };
+
     return (
         <header>
             <nav className='mobile-nav'>
@@ -17,12 +47,29 @@ const MobileHeader = () => {
                     </Link>
 
                     <div className='search'>
-                        <form className='search-bar'>
-                            <input type='text' placeholder='Search' className='search-string'></input>
+                        <form className='search-bar' type='submit' onSubmit={handleSearch}>
+                            <input
+                                type='text'
+                                placeholder='Search'
+                                className='search-string'
+                                value={searchString}
+                                onChange={(e) => setSearchString(e.target.value)}
+                            />
                             <button className='search-button'>
                                 <img src={process.env.PUBLIC_URL + '/images/newsearchicon.png'} width='20px'></img>
                             </button>
                         </form>
+                        {suggestions.length > 0 && (
+                            <div className='suggestions-dropdown'>
+                                {suggestions.map((suggestion, index) => (
+                                    <Link key={index} to={`/SquareView/${suggestion._id}`}>
+                                        <div className='suggestion-item'>
+                                            {suggestion.name}
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {!show ? (

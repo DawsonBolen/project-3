@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles/blog.css'
 import Square from './square';
 import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
@@ -10,8 +10,34 @@ import Auth from '../utils/auth';
 const BlogFeed = () => {
     // const profile = Auth.getProfile();
     // const userId = profile.data._id
+    const [searchTermFromURL, setSearchTermFromURL] = useState('');
+    const [filteredResults, setFilteredResults] = useState([]);
+    const [squaresData, setSquaresData] = useState([]);
 
     const { loading, data } = useQuery(GET_SQUARES);
+
+    useEffect(() => {
+        if (data && data.squares) {
+            setSquaresData(data.squares);
+            setFilteredResults(data.squares);
+            updateSearchTermFromURL();
+
+        }
+    }, [data]);
+
+    useEffect(() => {
+        if (searchTermFromURL !== "") {
+            const newData = squaresData?.filter(item => item.name.toLowerCase().includes(searchTermFromURL.toLowerCase()));
+            setFilteredResults(newData);
+        }
+    }, [searchTermFromURL]);
+
+    function updateSearchTermFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchTerm = urlParams.get('search_term');
+        setSearchTermFromURL(searchTerm || '');
+    }
+
 
     // const [Bookmark] = useMutation(BOOKMARK);
     // const [Like] = useMutation(LIKE);
@@ -57,9 +83,9 @@ const BlogFeed = () => {
 
     return (
         <>
-            {data ? (
+            {filteredResults?.length > 0 ? (
                 <section className='blog-feed'>
-                    {data && data.squares.map((square) => (
+                    {filteredResults?.map((square) => (
                         <Square key={square._id} square={square} />
                     ))}
                 </section>
