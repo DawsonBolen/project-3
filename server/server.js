@@ -12,10 +12,13 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  uploads: {
+    maxFileSize: 20 * 1024 * 1024,
+  }
 });
                
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));

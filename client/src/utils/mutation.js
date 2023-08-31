@@ -106,3 +106,9 @@ mutation REMOVE_BOOKMARK($user: ID!, $square: ID!) {
   }
 }`
 
+export const EDIT_USER = gql`
+mutation EDIT_USER($image: String!) {
+  editUser(image: $image) {
+    image
+  }
+}`

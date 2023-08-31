@@ -6,6 +6,7 @@ export const GET_PROFILE = gql`
 query ($id: ID!) {
   user(_id: $id) {
     _id
+    image
     savedCount
     postCount
     totalLikes
@@ -108,5 +109,25 @@ query SEARCH_SQUARES($name: String!) {
     name
     shortDescription
     longDescription
+  }
+}`
+
+export const GET_POSTS = gql`
+query GET_POSTS {
+  posts {
+    _id
+    comments {
+      _id
+      commentBody
+      user {
+        _id
+        username
+      }
+    }
+    postBody
+    postTitle
+    user {
+      username
+    }
   }
 }`

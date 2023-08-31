@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_SQUARE } from '../../utils/mutation';
 import Auth from '../../utils/auth';
+import { GET_SQUARES } from '../../utils/queries';
+import axios from 'axios'
 
 const CreateSquare = () => {
     const profile = Auth.getProfile();
@@ -11,7 +13,9 @@ const CreateSquare = () => {
 
     const navigate = useNavigate();
 
-    const [formData, setData] = useState({ name: '', shortDescription: '', longDescription: '', image: '' })
+    const [formData, setData] = useState({ name: '', shortDescription: '', longDescription: '' })
+
+    const [postImage, setPostImage] = useState({ image: ''})
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -29,8 +33,9 @@ const CreateSquare = () => {
                     name: formData.name,
                     shortDescription: formData.shortDescription,
                     longDescription: formData.longDescription,
-                    image: formData.image,
+                    image: postImage.image,
                 },
+                refetchQueries: [{ query: GET_SQUARES }],
             });
 
             navigate('/Home');
@@ -39,14 +44,21 @@ const CreateSquare = () => {
         }
     }
 
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        setPostImage({ ...postImage, image: base64 })
+    }
+
     return (
         <main className='create-square-body'>
             <h1>Create A New Square</h1>
             <form onSubmit={handleFormSubmit} id='create-square'>
                 <input onChange={handleChange} value={formData.name} className='create-input' type='text' placeholder='Name' name='name'></input>
                 <input onChange={handleChange} value={formData.shortDescription} className='create-input' type='text' placeholder='Short Description' name='shortDescription'></input>
+    
+                <input onChange={(e) => handleFileUpload(e)}className='create-input' type='file' accept='.jpeg, .png, .jpg' placeholder='Image Url' name='image'></input>
                 <h5 id='Summary-label'>Summary</h5>
-                <input onChange={handleChange} value={formData.image} className='create-input' type='text' placeholder='Image Url' name='image'></input>
                 <textarea onChange={handleChange} value={formData.longDescription} id='summary' type='text' name='longDescription'></textarea>
                 <button onClick={handleFormSubmit} type='submit' className='create-square'>Create Square</button>
 
@@ -56,3 +68,16 @@ const CreateSquare = () => {
 }
 
 export default CreateSquare
+
+function convertToBase64(file){
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result)
+        };
+        fileReader.onerror = (error) => {
+            reject(error)
+        };
+    })
+}

@@ -380,3 +380,14 @@
     align-items: center;
     width: 45px;
 }
+
+.square-nav-name {
+    color: #495867;
+    text-align: center;
+    margin-bottom: 2em;
+    font-size: 1.5em;
+}
+
+.search-square-btn:hover{
+    background-color: #FE5F55;
+}
