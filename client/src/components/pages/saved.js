@@ -13,7 +13,7 @@ const Saved = () => {
     const profile = Auth.getProfile();
     const id = profile.data._id;
 
-    const { loading, error, data } = useQuery(GET_PROFILE, {
+    const { loading, error, data, refetch } = useQuery(GET_PROFILE, {
         // Pass the profileId as a variable to the query
         variables: { id },
     });
@@ -34,6 +34,7 @@ const Saved = () => {
                 square: squareId,
             },
         });
+        refetch();
     }
 
     return (

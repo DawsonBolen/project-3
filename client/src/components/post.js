@@ -57,7 +57,7 @@ const Post = ({ post }) => {
                 <div className='post-main-bod-1'>
                     <h2 className='post-title'>{post.postTitle}</h2>
                     <div className='user-post-title'>
-                        <img src={process.env.PUBLIC_URL + '/images/user-icon-small.png'} width='14px'></img>
+                        <img src={post.user.image ? (post.user.image): process.env.PUBLIC_URL + '/images/profile-pic.png'} width='14px'></img>
                         <p>{post.user.username}</p>
                     </div>
                 </div>

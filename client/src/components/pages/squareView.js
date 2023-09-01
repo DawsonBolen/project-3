@@ -29,7 +29,7 @@ const SquareView = () => {
 
 
 
-    const { loading, error, data } = useQuery(GET_SQUARE, {
+    const { loading, error, data, refetch } = useQuery(GET_SQUARE, {
         variables: { id },
     });
 
@@ -54,10 +54,10 @@ const SquareView = () => {
                 user: userId,
                 square: id,
             },
-            refetchQueries: [{ query: GET_POSTS }],
+            
         });
 
-
+        refetch();
         togglePostForm();
 
     }
