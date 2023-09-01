@@ -4,12 +4,20 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
 import { BOOKMARK, LIKE, REMOVE_BOOKMARK } from '../utils/mutation';
 import Auth from '../utils/auth';
-import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
+import { GET_SQUARES, SEARCH_SQUARES, GET_PROFILE } from '../utils/queries'
 
-const Square = ({ square }) => {
+const Square = ({ square } ) => {
+    const profileId = Auth.getProfile();
+    const id = profileId.data._id
+  
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
 
+    const { loading, error, data, refetch } = useQuery(GET_PROFILE, {
+        // Pass the profileId as a variable to the query
+        variables: { id },
+      });
+    
     const toggleLike = () => {
         setLiked(!liked)
     };
@@ -32,8 +40,12 @@ const Square = ({ square }) => {
                 user: userId,
                 square: square._id,
             },
+
         });
+
         toggleBookmark();
+        refetch();
+
     }
 
     const likeSquare = async () => {
@@ -44,6 +56,7 @@ const Square = ({ square }) => {
             },
         });
         toggleLike();
+        refetch();
     };
 
     const unBookmark = async () => {
@@ -54,6 +67,7 @@ const Square = ({ square }) => {
             }
         })
         toggleBookmark();
+        refetch();
     }
 
 

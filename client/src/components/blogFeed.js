@@ -14,7 +14,9 @@ const BlogFeed = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [squaresData, setSquaresData] = useState([]);
 
-    const { loading, data } = useQuery(GET_SQUARES);
+    const { loading, data, refetch } = useQuery(GET_SQUARES);
+
+    const reload = refetch();
 
     useEffect(() => {
         if (data && data.squares) {
@@ -86,7 +88,7 @@ const BlogFeed = () => {
             {filteredResults?.length > 0 ? (
                 <section className='blog-feed'>
                     {filteredResults?.map((square) => (
-                        <Square key={square._id} square={square} />
+                        <Square key={square._id} square={square} refetch={reload}/>
                     ))}
                 </section>
             ) : null}
