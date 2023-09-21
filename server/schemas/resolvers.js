@@ -123,12 +123,30 @@ const resolvers = {
                 return square;
             }
         },
+        deleteSquare: async (parent, args, context) => {
+            if (context.user) {
+
+                const square = await Square.findByIdAndDelete(args);
+
+                return square;
+            }
+        },
         likeSquare: async (parent, args, context) => {
             if (context.user) {
 
                 await User.findByIdAndUpdate(args.user, { $addToSet: { likedSquares: args.square } })
 
                 await Square.findByIdAndUpdate(args.square, { $addToSet: { likes: args.user } })
+
+                return args;
+            }
+        },
+        removeLike: async (parent, args, context) => {
+            if (context.user) {
+
+                await User.findByIdAndUpdate(args.user, { $pull: { likedSquares: args.square } })
+
+                await Square.findByIdAndUpdate(args.square, { $pull: { likes: args.user } })
 
                 return args;
             }

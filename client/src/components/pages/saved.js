@@ -6,6 +6,7 @@ import { REMOVE_BOOKMARK } from '../../utils/mutation';
 import Auth from '../../utils/auth';
 import '../styles/blog.css'
 import '../styles/saved.css';
+import Square from '../square';
 
 const Saved = () => {
     const [RemoveBookmark] = useMutation(REMOVE_BOOKMARK)
@@ -41,54 +42,7 @@ const Saved = () => {
             {squares.length > 0 ? (
                 <div className='saved-main'>
                     {squares.map((square) => (
-                        <div
-                            key={square._id}
-                            className="square"
-                        >
-                            <div className='square-img' style={{ backgroundImage: `url(${square.image})` }}>
-
-                            </div>
-                            <div className='square-description'>
-                                <h2>{square.name}</h2>
-                                <div className='square-line'></div>
-                                <p className='short-description'>{square.shortDescription}</p>
-                                <div className='likes-and-activity'>
-                                    <div className='likes-total'>
-                                        <img src='images/red-heart-icon.png' width='15px' height='15px'></img>
-                                        <h6>{square.likesCount}</h6>
-                                    </div>
-                                    <div className='posts-total'>
-                                        <img src='images/posts-icon.png' width='15px' height='15px'></img>
-                                        <h6>{square.postCount}</h6>
-                                    </div>
-
-                                </div>
-                                <div className='square-line-2'></div>
-                                <div className='square-actions'>
-                                    <div className='square-actions-1'>
-                                        <div className='square-action-button square-like'>
-                                            <img src='images/heart-icon.png' width='22px'></img>
-                                        </div>
-                                        <div className='square-action-button square-save'>
-                                            <img src='images/save.png' width='15px'></img>
-                                        </div>
-                                        <div className='square-action-button square-remove'>
-                                            <img onClick={removeBookmark} square-id={square._id} src='images/x-icon.png' width='19px'></img>
-                                        </div>
-                                    </div>
-                                    <div className='square-actions-2'>
-                                        <Link to={`/SquareView/${square._id}`} style={{ textDecoration: 'none' }}>
-                                            <button className='view-square'>
-                                                View Square
-                                                <img src='images/arrow-icon.png' height='15px'></img>
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
+                        <Square key={square._id} square={square} userData={data} />
                     ))}
                 </div>
             ) : (

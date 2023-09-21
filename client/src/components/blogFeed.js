@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './styles/blog.css'
 import Square from './square';
-import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
+import { GET_SQUARES, SEARCH_SQUARES, GET_PROFILE } from '../utils/queries'
 import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
 import { BOOKMARK, LIKE } from '../utils/mutation';
 import Auth from '../utils/auth';
 
 const BlogFeed = () => {
-    // const profile = Auth.getProfile();
-    // const userId = profile.data._id
     const [searchTermFromURL, setSearchTermFromURL] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
     const [squaresData, setSquaresData] = useState([]);
 
     const { loading, data } = useQuery(GET_SQUARES);
+
+    const profile = Auth.getProfile();
+    const id = profile.data._id
+  
+    const { loading: loadingUser, error: userError, data: userData, refetch } = useQuery(GET_PROFILE, {
+      // Pass the profileId as a variable to the query
+      variables: { id },
+    });
 
     useEffect(() => {
         if (data && data.squares) {
@@ -86,7 +92,7 @@ const BlogFeed = () => {
             {filteredResults?.length > 0 ? (
                 <section className='blog-feed'>
                     {filteredResults?.map((square) => (
-                        <Square key={square._id} square={square} />
+                        <Square key={square._id} square={square} userData={userData} />
                     ))}
                 </section>
             ) : null}

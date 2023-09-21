@@ -112,3 +112,15 @@ mutation EDIT_USER($image: String!) {
     image
   }
 }`
+
+export const REMOVE_LIKE = gql`
+mutation REMOVE_LIKE($user: ID!, $square: ID!) {
+  removeLike(user: $user, square: $square) {
+    square {
+      _id
+    }
+    user {
+      _id
+    }
+  }
+}`

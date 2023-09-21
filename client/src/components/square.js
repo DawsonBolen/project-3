@@ -1,30 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/blog.css'
 import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
-import { BOOKMARK, LIKE, REMOVE_BOOKMARK } from '../utils/mutation';
+import { BOOKMARK, LIKE, REMOVE_BOOKMARK, REMOVE_LIKE } from '../utils/mutation';
 import Auth from '../utils/auth';
-import { GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
+import { GET_PROFILE, GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
 
-const Square = ({ square }) => {
+const Square = ({ square, userData }) => {
+
+    const likedSquaresArray = userData.user.likedSquares.map(like => like._id);
+    const bookmarkedArray = userData.user.bookmarkedSquares.map(bookmark => bookmark._id);
+  
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
 
     const toggleLike = () => {
         setLiked(!liked)
+        // const updatedLikedSquares = liked ? likedSquaresFromStorage.filter(id => id !== square._id) : [...likedSquaresFromStorage, square._id];
+        // localStorage.setItem('likedSquares', JSON.stringify(updatedLikedSquares));
     };
 
     const toggleBookmark = () => {
         setSaved(!saved)
+        // const updatedSavedSquares = saved ? savedSquaresFromStorage.filter(id => id !== square._id) : [...savedSquaresFromStorage, square._id];
+        // localStorage.setItem('savedSquares', JSON.stringify(updatedSavedSquares));
     };
 
-
+    // useEffect(() => {
+      
+    //     setLiked(userData.user.likedSquares);
+    //     setSaved(userData.user.likedSquares);
+    // }, [userData.user.likedSquares, userData.user.likedSquares]);
+   
+    
     const profile = Auth.getProfile();
-    const userId = profile.data._id
+    const userId = profile?.data?._id
 
     const [bookmarkMutation] = useMutation(BOOKMARK);
     const [likeMutation] = useMutation(LIKE);
     const [unBookmarkMutation] = useMutation(REMOVE_BOOKMARK);
+    const [unLikeMutation] = useMutation(REMOVE_LIKE);
+
+    useEffect(() => {
+        setLiked(likedSquaresArray.includes(square._id));
+        setSaved(bookmarkedArray.includes(square._id));
+    }, [userData, square._id]);
+
+    // const likedSquaresFromStorage = JSON.parse(localStorage.getItem('likedSquares')) || [];
+    // const savedSquaresFromStorage = JSON.parse(localStorage.getItem('savedSquares')) || [];
+  
+    
+    const { loading: loadingSquares, data: data, refetch: refetchSquares } = useQuery(GET_SQUARES);
+    
+    const { data: userProfile, refetch: refetchUser } = useQuery(GET_PROFILE);
 
     const bookmarkSquare = async () => {
         const response = await bookmarkMutation({
@@ -33,8 +61,10 @@ const Square = ({ square }) => {
                 square: square._id,
             },
         });
+        refetchSquares();
+        refetchUser();
         toggleBookmark();
-    }
+    };
 
     const likeSquare = async () => {
         const response = await likeMutation({
@@ -43,8 +73,22 @@ const Square = ({ square }) => {
                 square: square._id,
             },
         });
+        refetchSquares();
+        refetchUser();
         toggleLike();
     };
+
+    const unLike = async () => {
+        const response = await unLikeMutation({
+            variables: {
+                user: userId,
+                square: square._id,
+            }
+        });
+        toggleLike();
+        refetchSquares();
+        refetchUser();
+    }
 
     const unBookmark = async () => {
         const response = await unBookmarkMutation({
@@ -52,9 +96,11 @@ const Square = ({ square }) => {
                 user: userId,
                 square: square._id,
             }
-        })
+        });
+        refetchSquares();
+        refetchUser();
         toggleBookmark();
-    }
+    };
 
 
     //  const unlikeSquare = async () => {
@@ -104,7 +150,7 @@ const Square = ({ square }) => {
                             </div>
                         ) : (
 
-                            <div onClick={likeSquare} square-id={square._id} className='square-action-button square-like'>
+                            <div onClick={unLike} square-id={square._id} className='square-action-button square-like'>
                                 <img src={process.env.PUBLIC_URL + '/images/red-heart-icon.png'} width='22px'></img>
                             </div>
                         )}
