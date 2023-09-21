@@ -95,11 +95,18 @@ const typeDefs = gql`
             longDescription: String!
             image: String!
         ): Square
+        deleteSquare(
+            square: ID!
+        ): Square
         saveSquare(
             user: ID!
             square: ID!
         ): Post
         likeSquare(
+            user: ID!
+            square: ID!
+        ): Post
+        removeLike(
             user: ID!
             square: ID!
         ): Post

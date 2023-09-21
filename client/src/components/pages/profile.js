@@ -21,6 +21,10 @@ const Profile = () => {
     variables: { id },
   });
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   const [postImage, setPostImage] = useState({ image: ''})
 
   const handleFileUpload = async (e) => {
@@ -146,7 +150,7 @@ const Profile = () => {
           <section className='profile-squares'>
             <div>
             {data && data.user.createdSquares.map((square) => (
-              <Square key={square._id} square={square} />
+              <Square key={square._id} square={square} userData={data} />
             ))}
             </div>
           </section>
