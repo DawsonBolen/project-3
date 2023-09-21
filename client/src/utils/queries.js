@@ -38,6 +38,7 @@ query ($id: ID!) {
       shortDescription
       longDescription
       postCount
+      image
       likesCount
     }
     createdSquares {
@@ -86,6 +87,7 @@ query GET_SQUARE($id: ID!) {
       postBody
       user {
         username
+        image
       }
       comments {
         _id
