@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import './styles/blog.css'
 import { useMutation, useQuery } from '@apollo/client';
 import { Link, useParams } from 'react-router-dom';
-import { BOOKMARK, LIKE, REMOVE_BOOKMARK, REMOVE_LIKE } from '../utils/mutation';
+import { BOOKMARK, LIKE, REMOVE_BOOKMARK, REMOVE_LIKE, REMOVE_SQUARE } from '../utils/mutation';
 import Auth from '../utils/auth';
 import { GET_PROFILE, GET_SQUARES, SEARCH_SQUARES } from '../utils/queries'
 
 const Square = ({ square, userData }) => {
+    console.log(square)
+    const profile = Auth.getProfile();
+    const userId = profile?.data?._id
 
     const likedSquaresArray = userData.user.likedSquares.map(like => like._id);
     const bookmarkedArray = userData.user.bookmarkedSquares.map(bookmark => bookmark._id);
+    const squareOwner = square.createdBy.map(userSquare => userSquare._id);
   
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [owned, isOwned] = useState(false);
 
     const toggleLike = () => {
         setLiked(!liked)
@@ -31,17 +36,17 @@ const Square = ({ square, userData }) => {
     //     setLiked(userData.user.likedSquares);
     //     setSaved(userData.user.likedSquares);
     // }, [userData.user.likedSquares, userData.user.likedSquares]);
-   
-    
-    const profile = Auth.getProfile();
-    const userId = profile?.data?._id
 
+     
+   
     const [bookmarkMutation] = useMutation(BOOKMARK);
     const [likeMutation] = useMutation(LIKE);
     const [unBookmarkMutation] = useMutation(REMOVE_BOOKMARK);
     const [unLikeMutation] = useMutation(REMOVE_LIKE);
+    const [deleteSquareMutation] = useMutation(REMOVE_SQUARE);
 
     useEffect(() => {
+        isOwned(squareOwner.includes(userData.user._id))
         setLiked(likedSquaresArray.includes(square._id));
         setSaved(bookmarkedArray.includes(square._id));
     }, [userData, square._id]);
@@ -102,8 +107,17 @@ const Square = ({ square, userData }) => {
         toggleBookmark();
     };
 
+    const deleteSquare = async () => {
+        const response = await deleteSquareMutation({
+            variables: {
+                createdSquares: square._id,
+            }
+        });
+        refetchSquares();
+        refetchUser();
+    };
 
-    //  const unlikeSquare = async () => {
+  //  const unlikeSquare = async () => {
     //     const response = await unlikeMutation({
     //         variables: {
     //             user: userId,
@@ -121,7 +135,14 @@ const Square = ({ square, userData }) => {
             className="square"
         >
             <div className='square-img' style={{ backgroundImage: `url(${square.image})` }}>
-
+                {!owned  ? (
+                    <></>
+                ):(
+                    <div className='owner-square-control'>
+                        <p>Square Options</p>
+                        <p onClick={deleteSquare}>delete</p>
+                    </div>
+                )}
             </div>
             <div className='square-description'>
                 <h2>{square.name}</h2>
@@ -174,10 +195,11 @@ const Square = ({ square, userData }) => {
 
 
 
-
-                        <div className='square-action-button square-remove'>
-                            <img src={process.env.PUBLIC_URL + '/images/x-icon.png'} width='19px'></img>
-                        </div>
+                       <Link to={`/SquareView/${square._id}`} style={{ textDecoration: 'none' }}>
+                            <div  className='square-action-button square-post'>
+                                <img src={process.env.PUBLIC_URL + '/images/plus-icon.png'} width='22px'></img>
+                            </div>
+                            </Link>
                     </div>
                     <div className='square-actions-2'>
                         <Link to={`/SquareView/${square._id}`} style={{ textDecoration: 'none' }}>

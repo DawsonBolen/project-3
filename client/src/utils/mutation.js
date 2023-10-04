@@ -124,3 +124,12 @@ mutation REMOVE_LIKE($user: ID!, $square: ID!) {
     }
   }
 }`
+
+export const REMOVE_SQUARE = gql`
+mutation REMOVE_SQUARE($createdSquares: ID!) {
+  deleteSquare(createdSquares: $createdSquares) {
+    createdSquares {
+      _id
+    }
+  }
+}`

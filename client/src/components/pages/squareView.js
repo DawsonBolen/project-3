@@ -13,12 +13,6 @@ import { GET_POSTS } from '../../utils/queries';
 // import { ApolloClient } from '@apollo/client';
 // import { useApolloClient } from '@apollo/client';
 
-
-
-
-
-
-
 const SquareView = () => {
     const navigate = useNavigate();
     const profile = Auth.getProfile();
@@ -32,10 +26,6 @@ const SquareView = () => {
     const { loading, error, data, refetch } = useQuery(GET_SQUARE, {
         variables: { id },
     });
-
-    console.log('square data: ', data)
-
-    console.log(data)
 
     const [formData, setData] = useState({ title: '', body: '' })
 

@@ -8,7 +8,6 @@ import './styles/squareView.css';
 
 
 const Post = ({ post }) => {
-    console.log(post)
     const profile = Auth.getProfile();
     const userId = profile.data._id
     const [AddComment] = useMutation(ADD_COMMENT);

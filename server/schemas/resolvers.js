@@ -22,14 +22,33 @@ const resolvers = {
         },
         squares: async (parent, args, context) => {
             const squares = await Square.find()
+                .populate('createdBy')
                 .populate('users')
-                .populate('posts');
+                .populate('posts')
+                .populate(
+                    {
+                        path: 'posts',
+                        populate: {
+                            path: 'user'
+                        }
+                    }
+                )
+                .populate(
+                    {
+                        path: 'posts',
+                        populate: {
+                            path: 'comments',
+                            populate: { path: 'user' }
+                        }
+                    }
+                );
 
             return squares
         },
         square: async (parent, args, context) => {
 
             const square = await Square.findById(args)
+                .populate('createdBy')
                 .populate('posts')
                 .populate(
                     {
@@ -117,16 +136,17 @@ const resolvers = {
             if (context.user) {
 
                 const square = await Square.create(args);
+                console.log(square)
 
                 await User.findByIdAndUpdate(context.user._id, { $addToSet: { createdSquares: square._id } })
 
-                return square;
+                await Square.findByIdAndUpdate(square._id, { $push: { createdBy: context.user._id} } )
+
             }
         },
         deleteSquare: async (parent, args, context) => {
             if (context.user) {
-
-                const square = await Square.findByIdAndDelete(args);
+                const square = await Square.findByIdAndDelete(args.createdSquares);
 
                 return square;
             }

@@ -35,6 +35,10 @@ const squareSchema = new Schema({
           ref: 'Post'
         }
     ],
+    createdBy: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     createdAt: {
         type: Date,
         default: Date.now,
