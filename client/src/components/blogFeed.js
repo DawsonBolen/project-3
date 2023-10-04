@@ -12,9 +12,7 @@ const BlogFeed = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [squaresData, setSquaresData] = useState([]);
 
-    const { loading, data, refetch } = useQuery(GET_SQUARES);
-
-    const reload = refetch();
+    const { loading, data } = useQuery(GET_SQUARES);
 
     const profile = Auth.getProfile();
     const id = profile.data._id

@@ -10,16 +10,10 @@ const Square = ({ square, userData }) => {
 
     const likedSquaresArray = userData.user.likedSquares.map(like => like._id);
     const bookmarkedArray = userData.user.bookmarkedSquares.map(bookmark => bookmark._id);
-
   
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
 
-    const { loading, error, data, refetch } = useQuery(GET_PROFILE, {
-        // Pass the profileId as a variable to the query
-        variables: { id },
-      });
-    
     const toggleLike = () => {
         setLiked(!liked)
         // const updatedLikedSquares = liked ? likedSquaresFromStorage.filter(id => id !== square._id) : [...likedSquaresFromStorage, square._id];
@@ -66,13 +60,11 @@ const Square = ({ square, userData }) => {
                 user: userId,
                 square: square._id,
             },
-
         });
         refetchSquares();
         refetchUser();
         toggleBookmark();
     };
-
 
     const likeSquare = async () => {
         const response = await likeMutation({
@@ -84,7 +76,6 @@ const Square = ({ square, userData }) => {
         refetchSquares();
         refetchUser();
         toggleLike();
-        refetch();
     };
 
     const unLike = async () => {
@@ -110,7 +101,6 @@ const Square = ({ square, userData }) => {
         refetchUser();
         toggleBookmark();
     };
-
 
 
     //  const unlikeSquare = async () => {
