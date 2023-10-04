@@ -58,6 +58,7 @@ const typeDefs = gql`
         users: [User]
         posts: [Post]
         createdAt: String
+        createdBy: [User]
     }
 
     type Query {
@@ -96,8 +97,8 @@ const typeDefs = gql`
             image: String!
         ): Square
         deleteSquare(
-            square: ID!
-        ): Square
+            createdSquares: ID!
+        ): User
         saveSquare(
             user: ID!
             square: ID!

@@ -148,9 +148,13 @@ const Profile = () => {
           </section>
         ) : (
           <section className='profile-squares'>
+            <div className='delete-squares'> 
+            delete a square
+            </div>
             <div>
             {data && data.user.createdSquares.map((square) => (
               <Square key={square._id} square={square} userData={data} />
+            
             ))}
             </div>
           </section>

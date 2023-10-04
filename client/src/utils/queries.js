@@ -60,6 +60,9 @@ export const GET_SQUARES = gql`
 query GET_SQUARES {
   squares {
     _id
+    createdBy {
+      _id
+    }
     createdAt
     likesCount
     postCount
@@ -67,6 +70,24 @@ query GET_SQUARES {
     shortDescription
     longDescription
     image
+    posts {
+      _id
+      commentCount
+      postTitle
+      postBody
+      user {
+        username
+        image
+      }
+      comments {
+        _id
+        user {
+          _id
+          username
+        }
+        commentBody
+      }
+    }
   }
 }`;
 

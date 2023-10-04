@@ -34,6 +34,13 @@
 
 }
 
+
+.delete-square {
+    display: none;
+}
+
+
+
 .logout-btn {
     color: white;
     background-color: #495867;
